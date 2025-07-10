@@ -2,133 +2,486 @@
 <html lang="lv">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ievietot sludinājumu</title>
-  
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  
   <style>
-    /* Šeit mēs pārrakstām Bootstrap stilus ar Jūsu krāsām */
     body {
-      background-color: #E0D3BC; /* Jūsu fona krāsa */
-      color: #474737; /* Jūsu pamata teksta krāsa */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #E0D3BC;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 40px 0;
+      color: #474737;
     }
-
-    /* Galvenais rāmis */
-    .form-card {
-      background-color: #F0EDE1; /* Jūsu rāmja krāsa */
-      border: none;
+    .container {
+      background-color: #F0EDE1;
+      padding: 40px 50px;
+      border-radius: 15px;
+      max-width: 800px;
+      width: 90%;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      text-align: left;
     }
-
-    /* Virsraksti */
-    h1, h2, .form-label {
-        color: #474737;
+    h1, h2 {
+      text-align: center;
+      color: #474737;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 25px;
     }
     h2 {
-        border-bottom: 2px solid #CBD7B3;
+      font-size: 1.5rem;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      border-bottom: 2px solid #CBD7B3;
+      padding-bottom: 10px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border: 2px solid #CBD7B3;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      resize: vertical;
+      box-sizing: border-box;
+      background-color: white;
+    }
+    .year-inputs {
+      display: flex;
+      gap: 20px;
+    }
+    .year-inputs > div {
+        flex: 1;
+    }
+    textarea {
+      min-height: 100px;
+    }
+    input[type="submit"] {
+      background-color: #474737;
+      color: white;
+      font-weight: 700;
+      border: none;
+      padding: 14px 25px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+      margin-top: 30px;
+    }
+    input[type="submit"]:hover {
+      background-color: #A7AE92;
+      color: #474737;
+    }
+    .filter-group {
+        display: none;
+    }
+    .extras-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .extra-item {
+        display: flex;
+        align-items: center;
+        background-color: #e9e6d9;
+        padding: 5px 10px;
+        border-radius: 6px;
+    }
+    .extra-item input[type="checkbox"] {
+        width: auto;
+        margin-right: 10px;
+    }
+    .extra-item label {
+        margin-bottom: 0;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+    /* Šo kodu pievienojiet savas <style> sadaļas pašās beigās */
+
+    @media (max-width: 600px) {
+      /* Visi stili, kas šeit ierakstīti, strādās TIKAI uz ekrāniem,
+         kas ir 600px plati vai šaurāki. */
+
+    .container {
+    /* Samazinām atstarpes uz telefona */
+    padding: 20px 15px;
     }
 
-    /* Ievadlauki */
-    .form-control, .form-select {
-        border-color: #CBD7B3; /* Jūsu apmales krāsa */
-    }
-    .form-control:focus, .form-select:focus {
-        border-color: #A7AE92; /* Jūsu "focus" krāsa */
-        box-shadow: 0 0 0 0.2rem rgba(167, 174, 146, 0.25); /* Pielāgots ēnojums */
+    h1 {
+    /* Samazinām virsraksta izmēru */
+    font-size: 2rem;
     }
 
-    /* Pielāgota poga, lai izmantotu Jūsu krāsas */
-    .btn-custom-olive {
-        background-color: #474737;
-        color: white;
-        border: none;
-        font-weight: 700;
-        transition: background-color 0.3s ease;
-    }
-    .btn-custom-olive:hover {
-        background-color: #A7AE92;
-        color: #474737;
+    /* Jūs varat pielāgot jebkuru citu elementu šeit.
+     Piemēram, ja jums ir elementi, kas stāv blakus,
+     šeit varat tos salikt vienu zem otra. */
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Ievietot sludinājumu</h1>
+    <form action="/post_ad_action" method="post">
+      
+      <h2>Galvenā informācija</h2>
+      <label for="category">Kategorija</label>
+      <select id="category" name="category" required>
+        <option value="" disabled selected>Izvēlies kategoriju</option>
+        <option value="transports">Transports</option>
+        <option value="elektronika">Elektronika</option>
+      </select>
 
-  <div class="container my-4 my-md-5">
-    <div class="card form-card p-4 p-md-5 shadow-sm">
-      <h1 class="text-center mb-4">Ievietot sludinājumu</h1>
-      <form action="/post_ad_action" method="post">
-        
-        <h2 class="h4 pb-2 mb-3">Galvenā informācija</h2>
-        
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="category" class="form-label">Kategorija</label>
-            <select id="category" name="category" class="form-select" required>
-              <option value="" disabled selected>Izvēlies kategoriju...</option>
-              <option value="transports">Transports</option>
-              <option value="elektronika">Elektronika</option>
-            </select>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="subcategory" class="form-label">Apakškategorija</label>
-            <select id="subcategory" name="subcategory" class="form-select" required>
-              <option value="" disabled selected>Vispirms izvēlies kategoriju</option>
-            </select>
-          </div>
-        </div>
+      <label for="subcategory">Apakškategorija</label>
+      <select id="subcategory" name="subcategory" required>
+        <option value="" disabled selected>Vispirms izvēlies kategoriju</option>
+      </select>
+      
+      <div id="transport-filters" class="filter-group">
+        <h2>Transportlīdzekļa parametri</h2>
+        <label for="car-brand">Marka</label>
+        <select id="car-brand" name="car_brand"></select>
 
-        <div id="transport-filters" class="d-none"> 
-          <h2 class="h4 pb-2 mt-4 mb-3">Transportlīdzekļa parametri</h2>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <label for="car-brand" class="form-label">Marka</label>
-              <select id="car-brand" name="car_brand" class="form-select"></select>
+        <label for="car-model">Modelis</label>
+        <select id="car-model" name="car_model"></select>
+        
+        <label>Gads</label>
+        <div class="year-inputs">
+            <div>
+                <label for="car-year-from">No</label>
+                <input type="number" id="car-year-from" name="car_year_from" placeholder="Piem., 1998" min="1900">
             </div>
-            <div class="col-md-6 mb-3">
-              <label for="car-model" class="form-label">Modelis</label>
-              <select id="car-model" name="car_model" class="form-select"></select>
+            <div>
+                <label for="car-year-to">Līdz</label>
+                <input type="number" id="car-year-to" name="car_year_to" placeholder="Piem., 2024" min="1900">
             </div>
-          </div>
-        </div>
-        
-        <h2 class="h4 pb-2 mt-4 mb-3">Sludinājuma apraksts</h2>
-        <div class="mb-3">
-          <label for="title" class="form-label">Nosaukums</label>
-          <input type="text" id="title" name="title" class="form-control" placeholder="Piem., Pārdod VW Tiguan, teicamā stāvoklī" required>
-        </div>
-        <div class="mb-3">
-          <label for="description" class="form-label">Apraksts</label>
-          <textarea id="description" name="description" class="form-control" rows="4" placeholder="Šeit detalizēti aprakstiet..." required></textarea>
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="price" class="form-label">Cena (€)</label>
-            <input type="number" id="price" name="price" class="form-control" placeholder="0.00" min="0" step="0.01">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="image" class="form-label">Attēla URL</label>
-            <input type="text" id="image" name="image" class="form-control" placeholder="https://piemers.lv/attels.jpg">
-          </div>
         </div>
 
-        <button type="submit" class="btn btn-custom-olive btn-lg w-100 mt-4">Iesniegt sludinājumu</button>
-      </form>
-    </div>
+        <label for="car-mileage">Nobraukums (km)</label>
+        <input type="number" id="car-mileage" name="car_mileage" placeholder="Piem., 150000" min="0">
+
+        <h2>Aprīkojums un ekstras</h2>
+        <div class="extras-grid">
+          <div class="extra-item">
+            <input type="checkbox" id="extra-abs" name="extra_abs" value="true">
+            <label for="extra-abs">ABS</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-lietie-diski" name="extra_lietie-diski" value="true">
+            <label for="extra-lietie-diski">Lietie diski</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-signalizācija" name="extra_signalizācija" value="true">
+            <label for="extra-signalizācija">Signalizācija</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-klimata-kontrole" name="extra_klimata-kontrole" value="true">
+            <label for="extra-klimata-kontrole">Klimata kontrole</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-kondicionieris" name="extra_kondicionieris" value="true">
+            <label for="extra-kondicionieris">Kondicionieris</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-kruīza-kontrole" name="extra_kruīza-kontrole" value="true">
+            <label for="extra-kruīza-kontrole">Kruīza kontrole</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-stūres-hidropastiprinātājs" name="extra_stūres-hidropastiprinātājs" value="true">
+            <label for="extra-stūres-hidropastiprinātājs">Stūres hidropastiprinātājs</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-elektr-stūres-pastiprinātājs" name="extra_elektr-stūres-pastiprinātājs" value="true">
+            <label for="extra-elektr-stūres-pastiprinātājs">Elektr. stūres pastiprinātājs</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-parkošanās-sens-aizmugurē" name="extra_parkošanās-sens-aizmugurē" value="true">
+            <label for="extra-parkošanās-sens-aizmugurē">Parkošanās sens. aizmugurē</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-parkošanās-sens-priekšā" name="extra_parkošanās-sens-priekšā" value="true">
+            <label for="extra-parkošanās-sens-priekšā">Parkošanās sens. priekšā</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-atpakaļskata-kamera" name="extra_atpakaļskata-kamera" value="true">
+            <label for="extra-atpakaļskata-kamera">Atpakaļskata kamera</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-distances-kontrole" name="extra_distances-kontrole" value="true">
+            <label for="extra-distances-kontrole">Distances kontrole</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-lietus-sensors" name="extra_lietus-sensors" value="true">
+            <label for="extra-lietus-sensors">Lietus sensors</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-jumta-reliņi" name="extra_jumta-reliņi" value="true">
+            <label for="extra-jumta-reliņi">Jumta reliņi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sakabes-āķis" name="extra_sakabes-āķis" value="true">
+            <label for="extra-sakabes-āķis">Sakabes āķis</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-lūka" name="extra_lūka" value="true">
+            <label for="extra-lūka">Lūka</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-panorāmas-lūka" name="extra_panorāmas-lūka" value="true">
+            <label for="extra-panorāmas-lūka">Panorāmas lūka</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-pilnpiedziņa-4x4" name="extra_pilnpiedziņa-4x4" value="true">
+            <label for="extra-pilnpiedziņa-4x4">Pilnpiedziņa 4x4</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-pneimopiekare" name="extra_pneimopiekare" value="true">
+            <label for="extra-pneimopiekare">Pneimopiekare</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sporta-pakete" name="extra_sporta-pakete" value="true">
+            <label for="extra-sporta-pakete">Sporta pakete</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-servisa-grāmatiņa" name="extra_servisa-grāmatiņa" value="true">
+            <label for="extra-servisa-grāmatiņa">Servisa grāmatiņa</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-vieglmetāla-diski" name="extra_vieglmetāla-diski" value="true">
+            <label for="extra-vieglmetāla-diski">Vieglmetāla diski</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-ādas-apdare" name="extra_ādas-apdare" value="true">
+            <label for="extra-ādas-apdare">Ādas apdare</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-roku-balsti" name="extra_roku-balsti" value="true">
+            <label for="extra-roku-balsti">Roku balsti</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-tonēti-aizmugurējie-logi" name="extra_tonēti-aizmugurējie-logi" value="true">
+            <label for="extra-tonēti-aizmugurējie-logi">Tonēti aizmugurējie logi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-saulessargi-logos" name="extra_saulessargi-logos" value="true">
+            <label for="extra-saulessargi-logos">Saulessargi logos</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-isofix-stiprinājumi" name="extra_isofix-stiprinājumi" value="true">
+            <label for="extra-isofix-stiprinājumi">Isofix stiprinājumi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-ledusskapis" name="extra_ledusskapis" value="true">
+            <label for="extra-ledusskapis">Ledusskapis</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-elektriski-regulējami-sēdekļi" name="extra_elektriski-regulējami-sēdekļi" value="true">
+            <label for="extra-elektriski-regulējami-sēdekļi">Elektriski regulējami sēdekļi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sēdekļi-ar-atmiņu" name="extra_sēdekļi-ar-atmiņu" value="true">
+            <label for="extra-sēdekļi-ar-atmiņu">Sēdekļi ar atmiņu</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sēdekļu-apsilde" name="extra_sēdekļu-apsilde" value="true">
+            <label for="extra-sēdekļu-apsilde">Sēdekļu apsilde</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sporta-sēdekļi" name="extra_sporta-sēdekļi" value="true">
+            <label for="extra-sporta-sēdekļi">Sporta sēdekļi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-ventilējami-sēdekļi" name="extra_ventilējami-sēdekļi" value="true">
+            <label for="extra-ventilējami-sēdekļi">Ventilējami sēdekļi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-masāžas-sēdekļi" name="extra_masāžas-sēdekļi" value="true">
+            <label for="extra-masāžas-sēdekļi">Masāžas sēdekļi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-gaisa-spilveni-air-bag" name="extra_gaisa-spilveni-air-bag" value="true">
+            <label for="extra-gaisa-spilveni-air-bag">Gaisa spilveni (Air-bag)</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-centrālā-atslēga" name="extra_centrālā-atslēga" value="true">
+            <label for="extra-centrālā-atslēga">Centrālā atslēga</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-imobilaizers" name="extra_imobilaizers" value="true">
+            <label for="extra-imobilaizers">Imobilaizers</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-navigācija" name="extra_navigācija" value="true">
+            <label for="extra-navigācija">Navigācija</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-borta-dators" name="extra_borta-dators" value="true">
+            <label for="extra-borta-dators">Borta dators</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-riepu-spiediena-kontrole" name="extra_riepu-spiediena-kontrole" value="true">
+            <label for="extra-riepu-spiediena-kontrole">Riepu spiediena kontrole</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-palīgsistēma-braukš-joslās" name="extra_palīgsistēma-braukš-joslās" value="true">
+            <label for="extra-palīgsistēma-braukš-joslās">Palīgsistēma braukš. joslās</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-ceļa-zīmju-atpazīš-sistēma" name="extra_ceļa-zīmju-atpazīš-sistēma" value="true">
+            <label for="extra-ceļa-zīmju-atpazīš-sistēma">Ceļa zīmju atpazīš. sistēma</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-klusuma-zonu-sistēma" name="extra_klusuma-zonu-sistēma" value="true">
+            <label for="extra-klusuma-zonu-sistēma">Klusuma zonu sistēma</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-fm/am" name="extra_fm/am" value="true">
+            <label for="extra-fm/am">FM/AM</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-cd" name="extra_cd" value="true">
+            <label for="extra-cd">CD</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-cd-mainītājs" name="extra_cd-mainītājs" value="true">
+            <label for="extra-cd-mainītājs">CD mainītājs</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-dvd" name="extra_dvd" value="true">
+            <label for="extra-dvd">DVD</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-dvd-mainītājs" name="extra_dvd-mainītājs" value="true">
+            <label for="extra-dvd-mainītājs">DVD mainītājs</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-mp3" name="extra_mp3" value="true">
+            <label for="extra-mp3">MP3</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-usb" name="extra_usb" value="true">
+            <label for="extra-usb">USB</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-sdcard" name="extra_sdcard" value="true">
+            <label for="extra-sdcard">SDcard</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-hdd" name="extra_hdd" value="true">
+            <label for="extra-hdd">HDD</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-tv" name="extra_tv" value="true">
+            <label for="extra-tv">TV</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-lcd" name="extra_lcd" value="true">
+            <label for="extra-lcd">LCD</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-aux" name="extra_aux" value="true">
+            <label for="extra-aux">AUX</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-bluetooth" name="extra_bluetooth" value="true">
+            <label for="extra-bluetooth">Bluetooth</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-hands-free" name="extra_hands-free" value="true">
+            <label for="extra-hands-free">Hands-free</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-subwoofer" name="extra_subwoofer" value="true">
+            <label for="extra-subwoofer">Subwoofer</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-bi-ksenona" name="extra_bi-ksenona" value="true">
+            <label for="extra-bi-ksenona">Bi-ksenona</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-led" name="extra_led" value="true">
+            <label for="extra-led">LED</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-led-bremžugunis" name="extra_led-bremžugunis" value="true">
+            <label for="extra-led-bremžugunis">LED bremžugunis</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-lampu-mazgātāji" name="extra_lampu-mazgātāji" value="true">
+            <label for="extra-lampu-mazgātāji">Lampu mazgātāji</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-miglas-lukturi" name="extra_miglas-lukturi" value="true">
+            <label for="extra-miglas-lukturi">Miglas lukturi</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-automāt-tuvās-gaismas" name="extra_automāt-tuvās-gaismas" value="true">
+            <label for="extra-automāt-tuvās-gaismas">Automāt. tuvās gaismas</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-automāt-tālās-gaismas" name="extra_automāt-tālās-gaismas" value="true">
+            <label for="extra-automāt-tālās-gaismas">Automāt. tālās gaismas</label>
+          </div>
+          <div class="extra-item">
+            <input type="checkbox" id="extra-adaptīvās-tālās-gaismas" name="extra_adaptīvās-tālās-gaismas" value="true">
+            <label for="extra-adaptīvās-tālās-gaismas">Adaptīvās tālās gaismas</label>
+          </div>
+        </div>
+      </div>
+      
+      <h2>Sludinājuma apraksts</h2>
+      <label for="title">Nosaukums</label>
+      <input type="text" id="title" name="title" placeholder="Piem., Pārdod VW Tiguan, teicamā stāvoklī" required />
+
+      <label for="description">Apraksts</label>
+      <textarea id="description" name="description" placeholder="Šeit detalizēti aprakstiet automašīnu..." required></textarea>
+      
+      <label for="price">Cena (EUR)</label>
+      <input type="number" id="price" name="price" placeholder="0.00" min="0" step="0.01" />
+
+      <label for="image">Attēla URL</label>
+      <input type="text" id="image" name="image" placeholder="https://piemers.lv/attels.jpg" />
+
+      <input type="submit" value="Iesniegt sludinājumu" />
+    </form>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Jūsu JavaScript filtru loģika paliek nemainīga
+    // --- DATU IELĀDE UN FILTRU LOĢIKA ---
+    
+    // Elementu definēšana
     const categorySelect = document.getElementById('category');
     const subcategorySelect = document.getElementById('subcategory');
     const transportFilters = document.getElementById('transport-filters');
     const carBrandSelect = document.getElementById('car-brand');
     const carModelSelect = document.getElementById('car-model');
+
+    // Datu krātuve, kas tiks aizpildīta no JSON faila
     let carBrandAndModelData = {};
+
     const subcategoryData = {
         transports: ['Vieglie auto', 'Motocikli', 'Velosipēdi'],
-        elektronika: ['Telefoni', 'Datori']
+        elektronika: ['Telefoni', 'Datori'] // Piemēram
     };
+    
+    // Palīgfunkcija, kas aizpilda <select> laukus
     function populateSelect(selectElement, items, defaultOptionText) {
         selectElement.innerHTML = `<option value="" disabled selected>${defaultOptionText}</option>`;
         if (!items) return;
@@ -139,42 +492,70 @@
             selectElement.appendChild(option);
         });
     }
+
+    // Funkcija, kas paslēpj visas specifisko filtru grupas
+    function hideAllFilterGroups() {
+        transportFilters.style.display = 'none';
+    }
+
+    // Galvenā loģika, kas sākas, kad lapa ir ielādējusies
     document.addEventListener('DOMContentLoaded', () => {
+        // Ielādējam sagatavotos auto datus no servera static mapes
         fetch('/static/car_data.json')
-            .then(response => response.ok ? response.json() : Promise.reject('Datu fails netika atrasts'))
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Tīkla atbilde nebija veiksmīga');
+                }
+                return response.json();
+            })
             .then(data => {
                 carBrandAndModelData = data;
+                console.log("Auto marku un modeļu dati veiksmīgi ielādēti.");
+                // Tikai pēc datu ielādes aktivizējam filtru loģiku
                 initializeFilters();
             })
             .catch(error => {
                 console.error('Kļūda, ielādējot auto datus:', error);
+                // Parāda lietotājam kļūdas paziņojumu, ja dati nav atrasti
+                carBrandSelect.innerHTML = '<option>Kļūda: Nevarēja ielādēt marku sarakstu.</option>';
                 initializeFilters(); 
             });
     });
+
+    // Funkcija, kas iestata visus notikumu klausītājus (event listeners)
     function initializeFilters() {
+        hideAllFilterGroups();
+
         categorySelect.addEventListener('change', () => {
             const selectedCategory = categorySelect.value;
-            transportFilters.classList.add('d-none');
-            subcategorySelect.innerHTML = '<option value="" disabled selected>Izvēlies...</option>';
+            hideAllFilterGroups();
+            
+            subcategorySelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies kategoriju</option>';
+            carBrandSelect.innerHTML = '';
+            carModelSelect.innerHTML = '';
+
             if (subcategoryData[selectedCategory]) {
                 populateSelect(subcategorySelect, subcategoryData[selectedCategory], "Izvēlies apakškategoriju...");
             }
         });
+
         subcategorySelect.addEventListener('change', () => {
             const selectedSubcategory = subcategorySelect.value;
+            hideAllFilterGroups();
+
             if (selectedSubcategory === 'Vieglie auto') {
-                transportFilters.classList.remove('d-none');
+                transportFilters.style.display = 'block';
+                // Pārbaudām, vai dati ir ielādēti
                 if (Object.keys(carBrandAndModelData).length > 0) {
-                   const carBrands = Object.keys(carBrandAndModelData);
-                   populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
+                    const carBrands = Object.keys(carBrandAndModelData);
+                    populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
                 } else {
-                   carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
+                    carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
                 }
-            } else {
-                transportFilters.classList.add('d-none');
+                carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
             }
-            carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
         });
+
         carBrandSelect.addEventListener('change', () => {
             const selectedBrand = carBrandSelect.value;
             const models = carBrandAndModelData[selectedBrand] || [];
