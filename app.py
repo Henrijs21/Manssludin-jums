@@ -65,6 +65,12 @@ def post_ad_page():
 @app.route('/profile')
 def profile_page():
     return render_template('profile.html')
+# Pievienojiet šo jauno funkciju savā app.py failā
+
+@app.route('/iesniegt-sludinajumu')
+def post_ad_page():
+    # Šī funkcija renderē (parāda) jūsu post-ad.html lapu
+    return render_template('post-ad.html')
 
 
 # Nodrošina, ka serveris tiek palaists, tikai palaižot šo failu
