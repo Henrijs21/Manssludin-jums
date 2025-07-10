@@ -89,6 +89,7 @@
       background-color: #A7AE92;
       color: #474737;
     }
+    /* Svarīgi: Visas filtru grupas sākotnēji paslēptas */
     .filter-group {
         display: none;
     }
@@ -114,25 +115,15 @@
         font-weight: 500;
         font-size: 0.95rem;
     }
-    /* Šo kodu pievienojiet savas <style> sadaļas pašās beigās */
 
+    /* Media queries */
     @media (max-width: 600px) {
-      /* Visi stili, kas šeit ierakstīti, strādās TIKAI uz ekrāniem,
-         kas ir 600px plati vai šaurāki. */
-
-    .container {
-    /* Samazinām atstarpes uz telefona */
-    padding: 20px 15px;
-    }
-
-    h1 {
-    /* Samazinām virsraksta izmēru */
-    font-size: 2rem;
-    }
-
-    /* Jūs varat pielāgot jebkuru citu elementu šeit.
-     Piemēram, ja jums ir elementi, kas stāv blakus,
-     šeit varat tos salikt vienu zem otra. */
+      .container {
+        padding: 20px 15px;
+      }
+      h1 {
+        font-size: 2rem;
+      }
     }
   </style>
 </head>
@@ -145,13 +136,21 @@
       <label for="category">Kategorija</label>
       <select id="category" name="category" required>
         <option value="" disabled selected>Izvēlies kategoriju</option>
-        <option value="transports">Transports</option>
-        <option value="elektronika">Elektronika</option>
+        </select>
+
+      <label for="subcategory1">Apakškategorija</label>
+      <select id="subcategory1" name="subcategory1">
+        <option value="" disabled selected>Vispirms izvēlies kategoriju</option>
       </select>
 
-      <label for="subcategory">Apakškategorija</label>
-      <select id="subcategory" name="subcategory" required>
-        <option value="" disabled selected>Vispirms izvēlies kategoriju</option>
+      <label for="subcategory2" style="display: none;">Dziļāka apakškategorija</label>
+      <select id="subcategory2" name="subcategory2" style="display: none;">
+        <option value="" disabled selected>Vispirms izvēlies apakškategoriju</option>
+      </select>
+
+      <label for="subcategory3" style="display: none;">Vēl dziļāka apakškategorija</label>
+      <select id="subcategory3" name="subcategory3" style="display: none;">
+        <option value="" disabled selected>Vispirms izvēlies dziļāku apakškategoriju</option>
       </select>
       
       <div id="transport-filters" class="filter-group">
@@ -445,13 +444,59 @@
           </div>
         </div>
       </div>
+
+      <div id="general-filters" class="filter-group">
+          <h2>Vispārīgie parametri</h2>
+          <label for="item-condition">Stāvoklis</label>
+          <select id="item-condition" name="item_condition">
+              <option value="" disabled selected>Izvēlies stāvokli</option>
+              <option value="jauns">Jauns</option>
+              <option value="gandrīz-jauns">Gandrīz jauns</option>
+              <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+              <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+              <option value="bojats">Bojāts (rezerves daļām)</option>
+          </select>
+          
+          <label for="item-brand">Zīmols/Ražotājs</label>
+          <input type="text" id="item-brand" name="item_brand" placeholder="Piem., Bosch, Nike, iPhone">
+
+          <label for="item-material">Materiāls</label>
+          <input type="text" id="item-material" name="item_material" placeholder="Piem., koks, kokvilna, stikls">
+      </div>
+
+      <div id="electronics-filters" class="filter-group">
+        <h2>Elektronikas parametri</h2>
+        <label for="electronics-brand">Zīmols</label>
+        <input type="text" id="electronics-brand" name="electronics_brand" placeholder="Piem., Samsung, Apple">
+
+        <label for="electronics-model">Modelis</label>
+        <input type="text" id="electronics-model" name="electronics_model" placeholder="Piem., iPhone 15 Pro, Galaxy S24">
+
+        <label for="electronics-storage">Atmiņa (GB)</label>
+        <input type="number" id="electronics-storage" name="electronics_storage" placeholder="Piem., 128, 256">
+      </div>
       
+      <div id="clothing-filters" class="filter-group">
+        <h2>Apģērba parametri</h2>
+        <label for="clothing-size">Izmērs</label>
+        <input type="text" id="clothing-size" name="clothing_size" placeholder="Piem., M, L, 38, 42">
+
+        <label for="clothing-gender">Dzimums</label>
+        <select id="clothing-gender" name="clothing_gender">
+            <option value="" disabled selected>Izvēlies dzimumu</option>
+            <option value="sieviesu">Sievietēm</option>
+            <option value="viriesu">Vīriešiem</option>
+            <option value="bernu">Bērniem</option>
+            <option value="unisex">Unisex</option>
+        </select>
+      </div>
+
       <h2>Sludinājuma apraksts</h2>
       <label for="title">Nosaukums</label>
-      <input type="text" id="title" name="title" placeholder="Piem., Pārdod VW Tiguan, teicamā stāvoklī" required />
+      <input type="text" id="title" name="title" placeholder="Piem., Pārdodu mazlietotu dīvānu, teicamā stāvoklī" required />
 
       <label for="description">Apraksts</label>
-      <textarea id="description" name="description" placeholder="Šeit detalizēti aprakstiet automašīnu..." required></textarea>
+      <textarea id="description" name="description" placeholder="Šeit detalizēti aprakstiet preci..." required></textarea>
       
       <label for="price">Cena (EUR)</label>
       <input type="number" id="price" name="price" placeholder="0.00" min="0" step="0.01" />
@@ -468,35 +513,241 @@
     
     // Elementu definēšana
     const categorySelect = document.getElementById('category');
-    const subcategorySelect = document.getElementById('subcategory');
+    const subcategorySelect1 = document.getElementById('subcategory1');
+    const subcategorySelect2 = document.getElementById('subcategory2');
+    const subcategorySelect3 = document.getElementById('subcategory3');
+
+    // Labels for subcategories
+    const subcategoryLabel1 = document.querySelector('label[for="subcategory1"]');
+    const subcategoryLabel2 = document.querySelector('label[for="subcategory2"]');
+    const subcategoryLabel3 = document.querySelector('label[for="subcategory3"]');
+
     const transportFilters = document.getElementById('transport-filters');
     const carBrandSelect = document.getElementById('car-brand');
     const carModelSelect = document.getElementById('car-model');
 
-    // Datu krātuve, kas tiks aizpildīta no JSON faila
+    const generalFilters = document.getElementById('general-filters'); // Vispārīgie filtri
+    const electronicsFilters = document.getElementById('electronics-filters'); // Elektronikas filtri
+    const clothingFilters = document.getElementById('clothing-filters'); // Apģērba filtri
+
+    // Datu krātuve, kas tiks aizpildīta no JSON faila (auto markām/modeļiem)
     let carBrandAndModelData = {};
 
-    const subcategoryData = {
-        transports: ['Vieglie auto', 'Motocikli', 'Velosipēdi'],
-        elektronika: ['Telefoni', 'Datori'] // Piemēram
+    // Pilnīga kategoriju hierarhija un ar filtru grupu piesaisti
+    const fullCategoryData = {
+        "Māja": {
+            "Mēbeles": {
+                "Dīvāni un atpūtas krēsli": { filterGroup: "general-filters" },
+                "Gultas un matrači": { filterGroup: "general-filters" },
+                "Skapji un kumodes": { filterGroup: "general-filters" },
+                "Galdi un krēsli": { filterGroup: "general-filters" },
+                "Plaukti": { filterGroup: "general-filters" },
+                "Bērnu mēbeles": { filterGroup: "general-filters" },
+                "Biroja mēbeles": { filterGroup: "general-filters" },
+                "Dārza mēbeles": { filterGroup: "general-filters" },
+                "Virtuves mēbeles": { filterGroup: "general-filters" },
+                "Citas mēbeles": { filterGroup: "general-filters" }
+            },
+            "Sadzīves tehnika": {
+                "Veļas mašīnas": { filterGroup: "electronics-filters" },
+                "Žāvētāji": { filterGroup: "electronics-filters" },
+                "Ledusskapji": { filterGroup: "electronics-filters" },
+                "Saldētavas": { filterGroup: "electronics-filters" },
+                "Plītis un cepeškrāsnis": { filterGroup: "electronics-filters" },
+                "Trauku mazgājamās mašīnas": { filterGroup: "electronics-filters" },
+                "Mazā virtuves tehnika": { filterGroup: "electronics-filters" },
+                "Putekļsūcēji": { filterGroup: "electronics-filters" },
+                "Gludekļi": { filterGroup: "electronics-filters" },
+                "Apkures ierīces": { filterGroup: "electronics-filters" },
+                "Gaisa kondicionieri": { filterGroup: "electronics-filters" },
+                "Cita sadzīves tehnika": { filterGroup: "electronics-filters" }
+            },
+            "Virtuves piederumi un trauki": { filterGroup: "general-filters" },
+            "Tekstils un interjers": { filterGroup: "general-filters" },
+            "Apgaismojums": { filterGroup: "general-filters" },
+            "Dārzs un sēta": { filterGroup: "general-filters" },
+            "Santehnika un vannas istabas aprīkojums": { filterGroup: "general-filters" },
+            "Cits mājai": { filterGroup: "general-filters" }
+        },
+        "Celtniecība": {
+            "Celtniecības materiāli": { filterGroup: "general-filters" },
+            "Darbarīki": { filterGroup: "general-filters" },
+            "Santehnika un apkure (celtniecības kontekstā)": { filterGroup: "general-filters" },
+            "Elektroinstalācija": { filterGroup: "general-filters" },
+            "Celtniecības tehnika": { filterGroup: "general-filters" },
+            "Darba apģērbs un drošība": { filterGroup: "clothing-filters" }, // Var izmantot clothing-filters ar specifiku
+            "Cits celtniecībai": { filterGroup: "general-filters" }
+        },
+        "Elektronika": {
+            "Viedtālruņi un telefoni": { filterGroup: "electronics-filters" },
+            "Datori un biroja tehnika": { filterGroup: "electronics-filters" },
+            "Audio un video tehnika": { filterGroup: "electronics-filters" },
+            "Spēļu konsoles un spēles": { filterGroup: "electronics-filters" },
+            "Viedierīces un valkājamā elektronika": { filterGroup: "electronics-filters" },
+            "Biroja preces": { filterGroup: "general-filters" },
+            "Cita elektronika": { filterGroup: "general-filters" }
+        },
+        "Apģērbs": {
+            "Sievietēm": { filterGroup: "clothing-filters" },
+            "Vīriešiem": { filterGroup: "clothing-filters" },
+            "Bērniem (Apģērbs)": { filterGroup: "clothing-filters" },
+            "Sporta apģērbs": { filterGroup: "clothing-filters" },
+            "Apavi (vispārīgi)": { filterGroup: "clothing-filters" },
+            "Aksesuāri (vispārīgi)": { filterGroup: "general-filters" } // Varbūt specifiski aksesuāru filtri?
+        },
+        "Bērniem": {
+            "Bērnu transportlīdzekļi": { filterGroup: "general-filters" },
+            "Bērnu mēbeles": { filterGroup: "general-filters" },
+            "Rotaļlietas": { filterGroup: "general-filters" },
+            "Barošana un aprūpe": { filterGroup: "general-filters" },
+            "Grāmatas un mācību materiāli (bērniem)": { filterGroup: "general-filters" },
+            "Drošība bērniem": { filterGroup: "general-filters" },
+            "Cits bērniem": { filterGroup: "general-filters" }
+        },
+        "Izklaide sports": {
+            "Sports un fitnesa inventārs": { filterGroup: "general-filters" },
+            "Mūzikas instrumenti un aprīkojums": { filterGroup: "general-filters" },
+            "Hobiji un amatniecība": { filterGroup: "general-filters" },
+            "Filmas, Mūzika, Grāmatas": { filterGroup: "general-filters" },
+            "Tūrisms un atpūta": { filterGroup: "general-filters" },
+            "Medības un makšķerēšana": { filterGroup: "general-filters" },
+            "Ballīšu un pasākumu preces": { filterGroup: "general-filters" },
+            "Cits izklaidei un sportam": { filterGroup: "general-filters" }
+        },
+        "Dzīvnieki": {
+            "Suņi": { filterGroup: "general-filters" },
+            "Kaķi": { filterGroup: "general-filters" },
+            "Mazie mājdzīvnieki (grauzēji, putni, zivis)": { filterGroup: "general-filters" },
+            "Lauksaimniecības dzīvnieki (piederumi)": { filterGroup: "general-filters" },
+            "Cits dzīvniekiem": { filterGroup: "general-filters" }
+        },
+        "Transports": {
+            "Vieglie auto": { filterGroup: "transport-filters" }, // Specifiskais auto filtrs
+            "Smagais transports": { filterGroup: "general-filters" },
+            "Motocikli un motorolleri": { filterGroup: "general-filters" }, // Varbūt savs filtrs?
+            "Velosipēdi": { filterGroup: "general-filters" },
+            "Laivas un ūdens transports": { filterGroup: "general-filters" },
+            "Rezerves daļas un aksesuāri (visiem transportlīdzekļiem, izņemot vieglos auto)": { filterGroup: "general-filters" },
+            "Cits transports": { filterGroup: "general-filters" }
+        },
+        "Pakalpojumi": {
+            "Remonts un uzstādīšana": { filterGroup: "general-filters" },
+            "Skaistumkopšana un veselība": { filterGroup: "general-filters" },
+            "Mācības un kursi": { filterGroup: "general-filters" },
+            "Noma": { filterGroup: "general-filters" },
+            "Pasākumu organizēšana": { filterGroup: "general-filters" },
+            "Tīrīšana un uzkopšana": { filterGroup: "general-filters" },
+            "Cits pakalpojumiem": { filterGroup: "general-filters" }
+        }
     };
-    
+
     // Palīgfunkcija, kas aizpilda <select> laukus
     function populateSelect(selectElement, items, defaultOptionText) {
         selectElement.innerHTML = `<option value="" disabled selected>${defaultOptionText}</option>`;
-        if (!items) return;
+        if (!items) {
+            selectElement.style.display = 'none';
+            return;
+        }
+        selectElement.style.display = 'block'; // Ensure it's visible if there are items
         items.forEach(item => {
             const option = document.createElement('option');
-            option.value = item; 
-            option.textContent = item;
+            // If item is an object (for nested categories), use its key as value and display name
+            option.value = typeof item === 'object' ? Object.keys(item)[0] : item;
+            option.textContent = typeof item === 'object' ? Object.keys(item)[0] : item;
             selectElement.appendChild(option);
         });
     }
 
     // Funkcija, kas paslēpj visas specifisko filtru grupas
     function hideAllFilterGroups() {
-        transportFilters.style.display = 'none';
+        const filterGroups = document.querySelectorAll('.filter-group');
+        filterGroups.forEach(group => group.style.display = 'none');
     }
+
+    // Funkcija, kas parāda attiecīgo filtru grupu
+    function showFilterGroup(groupId) {
+        hideAllFilterGroups(); // Paslēpj visas, tad parāda vajadzīgo
+        const targetGroup = document.getElementById(groupId);
+        if (targetGroup) {
+            targetGroup.style.display = 'block';
+        }
+    }
+
+    // Funkcija, kas atjauno apakškategoriju laukus
+    function updateSubcategories(level, selectedValue) {
+        let currentLevelData;
+        let nextLevelSelect;
+        let nextLevelLabel;
+
+        // Reset lower level selects and labels
+        for (let i = level + 1; i <= 3; i++) {
+            const select = document.getElementById(`subcategory${i}`);
+            const label = document.querySelector(`label[for="subcategory${i}"]`);
+            select.innerHTML = `<option value="" disabled selected>Vispirms izvēlies ${i === 2 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}</option>`;
+            select.style.display = 'none';
+            label.style.display = 'none';
+        }
+        hideAllFilterGroups(); // Hide all filters when category changes
+
+        if (level === 0) { // Main category change
+            currentLevelData = fullCategoryData[selectedValue];
+            nextLevelSelect = subcategorySelect1;
+            nextLevelLabel = subcategoryLabel1;
+        } else if (level === 1) { // Subcategory 1 change
+            currentLevelData = fullCategoryData[categorySelect.value][selectedValue];
+            nextLevelSelect = subcategorySelect2;
+            nextLevelLabel = subcategoryLabel2;
+        } else if (level === 2) { // Subcategory 2 change
+            currentLevelData = fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue];
+            nextLevelSelect = subcategorySelect3;
+            nextLevelLabel = subcategoryLabel3;
+        } else { // Deepest level, display filters if any
+            const finalCategory = currentLevelData || {}; // Should be an object with filterGroup
+            if (finalCategory.filterGroup) {
+                showFilterGroup(finalCategory.filterGroup);
+                // Handle specific logic for "Vieglie auto"
+                if (finalCategory.filterGroup === 'transport-filters' && selectedValue === 'Vieglie auto') {
+                    if (Object.keys(carBrandAndModelData).length > 0) {
+                        const carBrands = Object.keys(carBrandAndModelData);
+                        populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
+                    } else {
+                        carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
+                    }
+                    carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
+                }
+            } else {
+                showFilterGroup('general-filters'); // Default to general filters if no specific group is defined
+            }
+            return;
+        }
+
+        if (currentLevelData && Object.keys(currentLevelData).length > 0) {
+            const nextLevelItems = Object.keys(currentLevelData);
+            populateSelect(nextLevelSelect, nextLevelItems, `Izvēlies ${level === 0 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}...`);
+            nextLevelLabel.style.display = 'block'; // Show the label
+        } else {
+            // No further subcategories, check if this is a leaf node with a filterGroup
+            const finalCategory = level === 1 ? fullCategoryData[categorySelect.value][selectedValue] : 
+                                level === 2 ? fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue] : 
+                                null;
+            if (finalCategory && finalCategory.filterGroup) {
+                showFilterGroup(finalCategory.filterGroup);
+                 // Handle specific logic for "Vieglie auto" (again for direct selection)
+                if (finalCategory.filterGroup === 'transport-filters' && selectedValue === 'Vieglie auto') {
+                    if (Object.keys(carBrandAndModelData).length > 0) {
+                        const carBrands = Object.keys(carBrandAndModelData);
+                        populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
+                    } else {
+                        carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
+                    }
+                    carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
+                }
+            } else {
+                showFilterGroup('general-filters'); // Default to general filters
+            }
+        }
+    }
+
 
     // Galvenā loģika, kas sākas, kad lapa ir ielādējusies
     document.addEventListener('DOMContentLoaded', () => {
@@ -518,44 +769,60 @@
                 console.error('Kļūda, ielādējot auto datus:', error);
                 // Parāda lietotājam kļūdas paziņojumu, ja dati nav atrasti
                 carBrandSelect.innerHTML = '<option>Kļūda: Nevarēja ielādēt marku sarakstu.</option>';
-                initializeFilters(); 
+                initializeFilters(); // Turpināt ar filtru inicializāciju pat, ja dati nav ielādēti
             });
     });
 
     // Funkcija, kas iestata visus notikumu klausītājus (event listeners)
     function initializeFilters() {
-        hideAllFilterGroups();
+        // Aizpilda galvenās kategorijas
+        populateSelect(categorySelect, Object.keys(fullCategoryData), "Izvēlies kategoriju...");
+        hideAllFilterGroups(); // Sākumā paslēpj visus filtrus
 
+        // Notikumu klausītāji kategoriju atlasei
         categorySelect.addEventListener('change', () => {
+            updateSubcategories(0, categorySelect.value);
+            // Reset lower level selects and their visibility
+            subcategorySelect2.style.display = 'none';
+            subcategoryLabel2.style.display = 'none';
+            subcategorySelect3.style.display = 'none';
+            subcategoryLabel3.style.display = 'none';
+        });
+
+        subcategorySelect1.addEventListener('change', () => {
+            updateSubcategories(1, subcategorySelect1.value);
+            // Reset lower level selects and their visibility
+            subcategorySelect3.style.display = 'none';
+            subcategoryLabel3.style.display = 'none';
+        });
+
+        subcategorySelect2.addEventListener('change', () => {
+            updateSubcategories(2, subcategorySelect2.value);
+        });
+
+        subcategorySelect3.addEventListener('change', () => {
+            // This is the deepest level, now we determine the filter group
             const selectedCategory = categorySelect.value;
-            hideAllFilterGroups();
-            
-            subcategorySelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies kategoriju</option>';
-            carBrandSelect.innerHTML = '';
-            carModelSelect.innerHTML = '';
+            const selectedSubcategory1 = subcategorySelect1.value;
+            const selectedSubcategory2 = subcategorySelect2.value;
+            const selectedSubcategory3 = subcategorySelect3.value;
 
-            if (subcategoryData[selectedCategory]) {
-                populateSelect(subcategorySelect, subcategoryData[selectedCategory], "Izvēlies apakškategoriju...");
-            }
-        });
-
-        subcategorySelect.addEventListener('change', () => {
-            const selectedSubcategory = subcategorySelect.value;
-            hideAllFilterGroups();
-
-            if (selectedSubcategory === 'Vieglie auto') {
-                transportFilters.style.display = 'block';
-                // Pārbaudām, vai dati ir ielādēti
-                if (Object.keys(carBrandAndModelData).length > 0) {
-                    const carBrands = Object.keys(carBrandAndModelData);
-                    populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
-                } else {
-                    carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
+            let currentLevel = fullCategoryData[selectedCategory];
+            if (currentLevel && currentLevel[selectedSubcategory1]) {
+                currentLevel = currentLevel[selectedSubcategory1];
+                if (currentLevel && currentLevel[selectedSubcategory2]) {
+                    currentLevel = currentLevel[selectedSubcategory2];
+                    if (currentLevel && currentLevel[selectedSubcategory3] && currentLevel[selectedSubcategory3].filterGroup) {
+                        showFilterGroup(currentLevel[selectedSubcategory3].filterGroup);
+                    } else {
+                        showFilterGroup('general-filters'); // Default if no specific filterGroup
+                    }
                 }
-                carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
             }
         });
 
+
+        // Auto markas un modeļa atlases loģika (esošā)
         carBrandSelect.addEventListener('change', () => {
             const selectedBrand = carBrandSelect.value;
             const models = carBrandAndModelData[selectedBrand] || [];
