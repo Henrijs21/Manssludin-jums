@@ -59,10 +59,10 @@ def get_ads():
 
 
 
-@app.route('/profile')
-def profile_page():
+@app.route('/profils')
+def profils_page():
+    # Pieņemot, ka jūsu HTML fails saucas 'profile.html'
     return render_template('profile.html')
-# Pievienojiet šo jauno funkciju savā app.py failā
 
 @app.route('/iesniegt-sludinajumu')
 def post_ad_page():
