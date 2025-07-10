@@ -57,10 +57,7 @@ def get_ads():
     
     return jsonify([dict(ad) for ad in ads])
 
-# Pārējie maršruti, lai atvērtu citas lapas
-@app.route('/post-ad')
-def post_ad_page():
-    return render_template('post-ad.html')
+
 
 @app.route('/profile')
 def profile_page():
