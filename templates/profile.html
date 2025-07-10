@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Profils - Bāzars</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #E0D3BC; /* Sand */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #474737; /* Olivewood */
+    }
+
+    .container {
+      background-color: #F0EDE1; /* Parchment */
+      padding: 40px 50px;
+      border-radius: 15px;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 25px;
+      color: #474737; /* Olivewood */
+      font-weight: 700;
+      letter-spacing: 1.2px;
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #474737; /* Olivewood */
+      font-size: 1.2rem;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px 14px;
+      margin-bottom: 20px;
+      border: 2px solid #CBD7B3; /* Olive */
+      border-radius: 8px;
+      font-size: 1.1rem;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input[type="text"]:focus, input[type="password"]:focus {
+      border-color: #A7AE92; /* Sage */
+    }
+
+    button {
+      background-color: #474737; /* Olivewood */
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #CBD7B3; /* Olive */
+      color: #474737;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Profils</h1>
+    <form>
+      <label for="username">Lietotājvārds</label>
+      <input type="text" id="username" name="username" placeholder="Ievadi lietotājvārdu" required />
+      
+      <label for="password">Parole</label>
+      <input type="password" id="password" name="password" placeholder="Ievadi paroli" required />
+      
+      <button type="submit">Ienākt</button>
+    </form>
+  </div>
+</body>
+</html>
