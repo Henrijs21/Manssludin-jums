@@ -130,13 +130,14 @@
 <body>
   <div class="container">
     <h1>Ievietot sludinājumu</h1>
-    <form action="/post_ad_action" method="post">
+    <form action="/api/ads" method="post">
       
       <h2>Galvenā informācija</h2>
       <label for="category">Kategorija</label>
       <select id="category" name="category" required>
         <option value="" disabled selected>Izvēlies kategoriju</option>
-        </select>
+        <!-- Kategorijas tiks ģenerētas ar JS -->
+      </select>
 
       <label for="subcategory1">Apakškategorija</label>
       <select id="subcategory1" name="subcategory1">
@@ -153,6 +154,7 @@
         <option value="" disabled selected>Vispirms izvēlies dziļāku apakškategoriju</option>
       </select>
       
+      <!-- Transporta filtri (esošie) -->
       <div id="transport-filters" class="filter-group">
         <h2>Transportlīdzekļa parametri</h2>
         <label for="car-brand">Marka</label>
@@ -179,271 +181,273 @@
         <h2>Aprīkojums un ekstras</h2>
         <div class="extras-grid">
           <div class="extra-item">
-            <input type="checkbox" id="extra-abs" name="extra_abs" value="true">
+            <input type="checkbox" id="extra-abs" name="car_extras" value="ABS">
             <label for="extra-abs">ABS</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-lietie-diski" name="extra_lietie-diski" value="true">
+            <input type="checkbox" id="extra-lietie-diski" name="car_extras" value="Lietie diski">
             <label for="extra-lietie-diski">Lietie diski</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-signalizācija" name="extra_signalizācija" value="true">
+            <input type="checkbox" id="extra-signalizācija" name="car_extras" value="Signalizācija">
             <label for="extra-signalizācija">Signalizācija</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-klimata-kontrole" name="extra_klimata-kontrole" value="true">
+            <input type="checkbox" id="extra-klimata-kontrole" name="car_extras" value="Klimata kontrole">
             <label for="extra-klimata-kontrole">Klimata kontrole</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-kondicionieris" name="extra_kondicionieris" value="true">
+            <input type="checkbox" id="extra-kondicionieris" name="car_extras" value="Kondicionieris">
             <label for="extra-kondicionieris">Kondicionieris</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-kruīza-kontrole" name="extra_kruīza-kontrole" value="true">
+            <input type="checkbox" id="extra-kruīza-kontrole" name="car_extras" value="Kruīza kontrole">
             <label for="extra-kruīza-kontrole">Kruīza kontrole</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-stūres-hidropastiprinātājs" name="extra_stūres-hidropastiprinātājs" value="true">
+            <input type="checkbox" id="extra-stūres-hidropastiprinātājs" name="car_extras" value="Stūres hidropastiprinātājs">
             <label for="extra-stūres-hidropastiprinātājs">Stūres hidropastiprinātājs</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-elektr-stūres-pastiprinātājs" name="extra_elektr-stūres-pastiprinātājs" value="true">
+            <input type="checkbox" id="extra-elektr-stūres-pastiprinātājs" name="car_extras" value="Elektr. stūres pastiprinātājs">
             <label for="extra-elektr-stūres-pastiprinātājs">Elektr. stūres pastiprinātājs</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-parkošanās-sens-aizmugurē" name="extra_parkošanās-sens-aizmugurē" value="true">
+            <input type="checkbox" id="extra-parkošanās-sens-aizmugurē" name="car_extras" value="Parkošanās sens. aizmugurē">
             <label for="extra-parkošanās-sens-aizmugurē">Parkošanās sens. aizmugurē</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-parkošanās-sens-priekšā" name="extra_parkošanās-sens-priekšā" value="true">
+            <input type="checkbox" id="extra-parkošanās-sens-priekšā" name="car_extras" value="Parkošanās sens. priekšā">
             <label for="extra-parkošanās-sens-priekšā">Parkošanās sens. priekšā</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-atpakaļskata-kamera" name="extra_atpakaļskata-kamera" value="true">
+            <input type="checkbox" id="extra-atpakaļskata-kamera" name="car_extras" value="Atpakaļskata kamera">
             <label for="extra-atpakaļskata-kamera">Atpakaļskata kamera</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-distances-kontrole" name="extra_distances-kontrole" value="true">
+            <input type="checkbox" id="extra-distances-kontrole" name="car_extras" value="Distances kontrole">
             <label for="extra-distances-kontrole">Distances kontrole</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-lietus-sensors" name="extra_lietus-sensors" value="true">
+            <input type="checkbox" id="extra-lietus-sensors" name="car_extras" value="Lietus sensors">
             <label for="extra-lietus-sensors">Lietus sensors</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-jumta-reliņi" name="extra_jumta-reliņi" value="true">
+            <input type="checkbox" id="extra-jumta-reliņi" name="car_extras" value="Jumta reliņi">
             <label for="extra-jumta-reliņi">Jumta reliņi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sakabes-āķis" name="extra_sakabes-āķis" value="true">
+            <input type="checkbox" id="extra-sakabes-āķis" name="car_extras" value="Sakabes āķis">
             <label for="extra-sakabes-āķis">Sakabes āķis</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-lūka" name="extra_lūka" value="true">
+            <input type="checkbox" id="extra-lūka" name="car_extras" value="Lūka">
             <label for="extra-lūka">Lūka</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-panorāmas-lūka" name="extra_panorāmas-lūka" value="true">
+            <input type="checkbox" id="extra-panorāmas-lūka" name="car_extras" value="Panorāmas lūka">
             <label for="extra-panorāmas-lūka">Panorāmas lūka</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-pilnpiedziņa-4x4" name="extra_pilnpiedziņa-4x4" value="true">
+            <input type="checkbox" id="extra-pilnpiedziņa-4x4" name="car_extras" value="Pilnpiedziņa 4x4">
             <label for="extra-pilnpiedziņa-4x4">Pilnpiedziņa 4x4</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-pneimopiekare" name="extra_pneimopiekare" value="true">
+            <input type="checkbox" id="extra-pneimopiekare" name="car_extras" value="Pneimopiekare">
             <label for="extra-pneimopiekare">Pneimopiekare</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sporta-pakete" name="extra_sporta-pakete" value="true">
+            <input type="checkbox" id="extra-sporta-pakete" name="car_extras" value="Sporta pakete">
             <label for="extra-sporta-pakete">Sporta pakete</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-servisa-grāmatiņa" name="extra_servisa-grāmatiņa" value="true">
+            <input type="checkbox" id="extra-servisa-grāmatiņa" name="car_extras" value="Servisa grāmatiņa">
             <label for="extra-servisa-grāmatiņa">Servisa grāmatiņa</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-vieglmetāla-diski" name="extra_vieglmetāla-diski" value="true">
+            <input type="checkbox" id="extra-vieglmetāla-diski" name="car_extras" value="Vieglmetāla diski">
             <label for="extra-vieglmetāla-diski">Vieglmetāla diski</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-ādas-apdare" name="extra_ādas-apdare" value="true">
+            <input type="checkbox" id="extra-ādas-apdare" name="car_extras" value="Ādas apdare">
             <label for="extra-ādas-apdare">Ādas apdare</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-roku-balsti" name="extra_roku-balsti" value="true">
+            <input type="checkbox" id="extra-roku-balsti" name="car_extras" value="Roku balsti">
             <label for="extra-roku-balsti">Roku balsti</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-tonēti-aizmugurējie-logi" name="extra_tonēti-aizmugurējie-logi" value="true">
+            <input type="checkbox" id="extra-tonēti-aizmugurējie-logi" name="car_extras" value="Tonēti aizmugurējie logi">
             <label for="extra-tonēti-aizmugurējie-logi">Tonēti aizmugurējie logi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-saulessargi-logos" name="extra_saulessargi-logos" value="true">
+            <input type="checkbox" id="extra-saulessargi-logos" name="car_extras" value="Saulessargi logos">
             <label for="extra-saulessargi-logos">Saulessargi logos</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-isofix-stiprinājumi" name="extra_isofix-stiprinājumi" value="true">
+            <input type="checkbox" id="extra-isofix-stiprinājumi" name="car_extras" value="Isofix stiprinājumi">
             <label for="extra-isofix-stiprinājumi">Isofix stiprinājumi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-ledusskapis" name="extra_ledusskapis" value="true">
+            <input type="checkbox" id="extra-ledusskapis" name="car_extras" value="Ledusskapis">
             <label for="extra-ledusskapis">Ledusskapis</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-elektriski-regulējami-sēdekļi" name="extra_elektriski-regulējami-sēdekļi" value="true">
+            <input type="checkbox" id="extra-elektriski-regulējami-sēdekļi" name="car_extras" value="Elektriski regulējami sēdekļi">
             <label for="extra-elektriski-regulējami-sēdekļi">Elektriski regulējami sēdekļi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sēdekļi-ar-atmiņu" name="extra_sēdekļi-ar-atmiņu" value="true">
+            <input type="checkbox" id="extra-sēdekļi-ar-atmiņu" name="car_extras" value="Sēdekļi ar atmiņu">
             <label for="extra-sēdekļi-ar-atmiņu">Sēdekļi ar atmiņu</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sēdekļu-apsilde" name="extra_sēdekļu-apsilde" value="true">
+            <input type="checkbox" id="extra-sēdekļu-apsilde" name="car_extras" value="Sēdekļu apsilde">
             <label for="extra-sēdekļu-apsilde">Sēdekļu apsilde</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sporta-sēdekļi" name="extra_sporta-sēdekļi" value="true">
+            <input type="checkbox" id="extra-sporta-sēdekļi" name="car_extras" value="Sporta sēdekļi">
             <label for="extra-sporta-sēdekļi">Sporta sēdekļi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-ventilējami-sēdekļi" name="extra_ventilējami-sēdekļi" value="true">
+            <input type="checkbox" id="extra-ventilējami-sēdekļi" name="car_extras" value="Ventilējami sēdekļi">
             <label for="extra-ventilējami-sēdekļi">Ventilējami sēdekļi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-masāžas-sēdekļi" name="extra_masāžas-sēdekļi" value="true">
+            <input type="checkbox" id="extra-masāžas-sēdekļi" name="car_extras" value="Masāžas sēdekļi">
             <label for="extra-masāžas-sēdekļi">Masāžas sēdekļi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-gaisa-spilveni-air-bag" name="extra_gaisa-spilveni-air-bag" value="true">
+            <input type="checkbox" id="extra-gaisa-spilveni-air-bag" name="car_extras" value="Gaisa spilveni (Air-bag)">
             <label for="extra-gaisa-spilveni-air-bag">Gaisa spilveni (Air-bag)</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-centrālā-atslēga" name="extra_centrālā-atslēga" value="true">
+            <input type="checkbox" id="extra-centrālā-atslēga" name="car_extras" value="Centrālā atslēga">
             <label for="extra-centrālā-atslēga">Centrālā atslēga</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-imobilaizers" name="extra_imobilaizers" value="true">
+            <input type="checkbox" id="extra-imobilaizers" name="car_extras" value="Imobilaizers">
             <label for="extra-imobilaizers">Imobilaizers</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-navigācija" name="extra_navigācija" value="true">
+            <input type="checkbox" id="extra-navigācija" name="car_extras" value="Navigācija">
             <label for="extra-navigācija">Navigācija</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-borta-dators" name="extra_borta-dators" value="true">
+            <input type="checkbox" id="extra-borta-dators" name="car_extras" value="Borta dators">
             <label for="extra-borta-dators">Borta dators</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-riepu-spiediena-kontrole" name="extra_riepu-spiediena-kontrole" value="true">
+            <input type="checkbox" id="extra-riepu-spiediena-kontrole" name="car_extras" value="Riepu spiediena kontrole">
             <label for="extra-riepu-spiediena-kontrole">Riepu spiediena kontrole</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-palīgsistēma-braukš-joslās" name="extra_palīgsistēma-braukš-joslās" value="true">
+            <input type="checkbox" id="extra-palīgsistēma-braukš-joslās" name="car_extras" value="Palīgsistēma braukš. joslās">
             <label for="extra-palīgsistēma-braukš-joslās">Palīgsistēma braukš. joslās</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-ceļa-zīmju-atpazīš-sistēma" name="extra_ceļa-zīmju-atpazīš-sistēma" value="true">
+            <input type="checkbox" id="extra-ceļa-zīmju-atpazīš-sistēma" name="car_extras" value="Ceļa zīmju atpazīš. sistēma">
             <label for="extra-ceļa-zīmju-atpazīš-sistēma">Ceļa zīmju atpazīš. sistēma</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-klusuma-zonu-sistēma" name="extra_klusuma-zonu-sistēma" value="true">
+            <input type="checkbox" id="extra-klusuma-zonu-sistēma" name="car_extras" value="Klusuma zonu sistēma">
             <label for="extra-klusuma-zonu-sistēma">Klusuma zonu sistēma</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-fm/am" name="extra_fm/am" value="true">
+            <input type="checkbox" id="extra-fm/am" name="car_extras" value="FM/AM">
             <label for="extra-fm/am">FM/AM</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-cd" name="extra_cd" value="true">
+            <input type="checkbox" id="extra-cd" name="car_extras" value="CD">
             <label for="extra-cd">CD</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-cd-mainītājs" name="extra_cd-mainītājs" value="true">
+            <input type="checkbox" id="extra-cd-mainītājs" name="car_extras" value="CD mainītājs">
             <label for="extra-cd-mainītājs">CD mainītājs</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-dvd" name="extra_dvd" value="true">
+            <input type="checkbox" id="extra-dvd" name="car_extras" value="DVD">
             <label for="extra-dvd">DVD</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-dvd-mainītājs" name="extra_dvd-mainītājs" value="true">
+            <input type="checkbox" id="extra-dvd-mainītājs" name="car_extras" value="DVD mainītājs">
             <label for="extra-dvd-mainītājs">DVD mainītājs</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-mp3" name="extra_mp3" value="true">
+            <input type="checkbox" id="extra-mp3" name="car_extras" value="MP3">
             <label for="extra-mp3">MP3</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-usb" name="extra_usb" value="true">
+            <input type="checkbox" id="extra-usb" name="car_extras" value="USB">
             <label for="extra-usb">USB</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-sdcard" name="extra_sdcard" value="true">
+            <input type="checkbox" id="extra-sdcard" name="car_extras" value="SDcard">
             <label for="extra-sdcard">SDcard</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-hdd" name="extra_hdd" value="true">
+            <input type="checkbox" id="extra-hdd" name="car_extras" value="HDD">
             <label for="extra-hdd">HDD</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-tv" name="extra_tv" value="true">
+            <input type="checkbox" id="extra-tv" name="car_extras" value="TV">
             <label for="extra-tv">TV</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-lcd" name="extra_lcd" value="true">
+            <input type="checkbox" id="extra-lcd" name="car_extras" value="LCD">
             <label for="extra-lcd">LCD</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-aux" name="extra_aux" value="true">
+            <input type="checkbox" id="extra-aux" name="car_extras" value="AUX">
             <label for="extra-aux">AUX</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-bluetooth" name="extra_bluetooth" value="true">
+            <input type="checkbox" id="extra-bluetooth" name="car_extras" value="Bluetooth">
             <label for="extra-bluetooth">Bluetooth</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-hands-free" name="extra_hands-free" value="true">
+            <input type="checkbox" id="extra-hands-free" name="car_extras" value="Hands-free">
             <label for="extra-hands-free">Hands-free</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-subwoofer" name="extra_subwoofer" value="true">
+            <input type="checkbox" id="extra-subwoofer" name="car_extras" value="Subwoofer">
             <label for="extra-subwoofer">Subwoofer</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-bi-ksenona" name="extra_bi-ksenona" value="true">
+            <input type="checkbox" id="extra-bi-ksenona" name="car_extras" value="Bi-ksenona">
             <label for="extra-bi-ksenona">Bi-ksenona</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-led" name="extra_led" value="true">
+            <input type="checkbox" id="extra-led" name="car_extras" value="LED">
             <label for="extra-led">LED</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-led-bremžugunis" name="extra_led-bremžugunis" value="true">
+            <input type="checkbox" id="extra-led-bremžugunis" name="car_extras" value="LED bremžugunis">
             <label for="extra-led-bremžugunis">LED bremžugunis</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-lampu-mazgātāji" name="extra_lampu-mazgātāji" value="true">
+            <input type="checkbox" id="extra-lampu-mazgātāji" name="car_extras" value="Lampu mazgātāji">
             <label for="extra-lampu-mazgātāji">Lampu mazgātāji</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-miglas-lukturi" name="extra_miglas-lukturi" value="true">
+            <input type="checkbox" id="extra-miglas-lukturi" name="car_extras" value="Miglas lukturi">
             <label for="extra-miglas-lukturi">Miglas lukturi</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-automāt-tuvās-gaismas" name="extra_automāt-tuvās-gaismas" value="true">
+            <input type="checkbox" id="extra-automāt-tuvās-gaismas" name="car_extras" value="Automāt. tuvās gaismas">
             <label for="extra-automāt-tuvās-gaismas">Automāt. tuvās gaismas</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-automāt-tālās-gaismas" name="extra_automāt-tālās-gaismas" value="true">
+            <input type="checkbox" id="extra-automāt-tālās-gaismas" name="car_extras" value="Automāt. tālās gaismas">
             <label for="extra-automāt-tālās-gaismas">Automāt. tālās gaismas</label>
           </div>
           <div class="extra-item">
-            <input type="checkbox" id="extra-adaptīvās-tālās-gaismas" name="extra_adaptīvās-tālās-gaismas" value="true">
+            <input type="checkbox" id="extra-adaptīvās-tālās-gaismas" name="car_extras" value="Adaptīvās tālās gaismas">
             <label for="extra-adaptīvās-tālās-gaismas">Adaptīvās tālās gaismas</label>
           </div>
         </div>
+      </div>
 
+      <!-- Papildu filtru grupas -->
       <div id="general-filters" class="filter-group">
           <h2>Vispārīgie parametri</h2>
           <label for="item-condition">Stāvoklis</label>
@@ -610,7 +614,7 @@
       <div id="baby-items-filters" class="filter-group">
         <h2>Bērnu preču parametri</h2>
         <label for="baby-age">Vecums (gadi)</label>
-        <input type="number" id="baby-age" name="baby_age" placeholder="Piem., 0-3, 3-6">
+        <input type="text" id="baby-age" name="baby_age" placeholder="Piem., 0-3, 3-6">
 
         <label for="baby-weight">Svars (kg)</label>
         <input type="number" id="baby-weight" name="baby_weight" placeholder="Piem., 0-13, 9-18">
@@ -732,137 +736,29 @@
     const animalsFilters = document.getElementById('animals-filters');
     const servicesFilters = document.getElementById('services-filters');
 
+    let carBrandAndModelData = {}; // Saglabā auto datus
 
-    // Datu krātuve, kas tiks aizpildīta no JSON faila (auto markām/modeļiem)
-    let carBrandAndModelData = {};
-
-    // Pilnīga kategoriju hierarhija un ar filtru grupu piesaisti
-    const fullCategoryData = {
-        "Māja": {
-            "Mēbeles": {
-                "Dīvāni un atpūtas krēsli": { filterGroup: "furniture-filters" },
-                "Gultas un matrači": { filterGroup: "furniture-filters" },
-                "Skapji un kumodes": { filterGroup: "furniture-filters" },
-                "Galdi un krēsli": { filterGroup: "furniture-filters" },
-                "Plaukti": { filterGroup: "furniture-filters" },
-                "Bērnu mēbeles": { filterGroup: "furniture-filters" },
-                "Biroja mēbeles": { filterGroup: "furniture-filters" },
-                "Dārza mēbeles": { filterGroup: "furniture-filters" },
-                "Virtuves mēbeles": { filterGroup: "furniture-filters" },
-                "Citas mēbeles": { filterGroup: "general-filters" }
-            },
-            "Sadzīves tehnika": {
-                "Veļas mašīnas": { filterGroup: "home-appliances-filters" },
-                "Žāvētāji": { filterGroup: "home-appliances-filters" },
-                "Ledusskapji": { filterGroup: "home-appliances-filters" },
-                "Saldētavas": { filterGroup: "home-appliances-filters" },
-                "Plītis un cepeškrāsnis": { filterGroup: "home-appliances-filters" },
-                "Trauku mazgājamās mašīnas": { filterGroup: "home-appliances-filters" },
-                "Mazā virtuves tehnika": { filterGroup: "home-appliances-filters" },
-                "Putekļsūcēji": { filterGroup: "home-appliances-filters" },
-                "Gludekļi": { filterGroup: "home-appliances-filters" },
-                "Apkures ierīces": { filterGroup: "home-appliances-filters" },
-                "Gaisa kondicionieri": { filterGroup: "home-appliances-filters" },
-                "Cita sadzīves tehnika": { filterGroup: "general-filters" }
-            },
-            "Virtuves piederumi un trauki": { filterGroup: "general-filters" },
-            "Tekstils un interjers": { filterGroup: "general-filters" },
-            "Apgaismojums": { filterGroup: "general-filters" },
-            "Dārzs un sēta": { filterGroup: "general-filters" },
-            "Santehnika un vannas istabas aprīkojums": { filterGroup: "general-filters" },
-            "Cits mājai": { filterGroup: "general-filters" }
-        },
-        "Celtniecība": {
-            "Celtniecības materiāli": { filterGroup: "general-filters" },
-            "Darbarīki": { filterGroup: "tools-equipment-filters" },
-            "Santehnika un apkure (celtniecības kontekstā)": { filterGroup: "general-filters" },
-            "Elektroinstalācija": { filterGroup: "general-filters" },
-            "Celtniecības tehnika": { filterGroup: "tools-equipment-filters" },
-            "Darba apģērbs un drošība": { filterGroup: "clothing-filters" }, // Var izmantot clothing-filters ar specifiku
-            "Cits celtniecībai": { filterGroup: "general-filters" }
-        },
-        "Elektronika": {
-            "Viedtālruņi un telefoni": { filterGroup: "electronics-filters" },
-            "Datori un biroja tehnika": { filterGroup: "electronics-filters" },
-            "Audio un video tehnika": { filterGroup: "electronics-filters" },
-            "Spēļu konsoles un spēles": { filterGroup: "electronics-filters" },
-            "Viedierīces un valkājamā elektronika": { filterGroup: "electronics-filters" },
-            "Biroja preces": { filterGroup: "general-filters" },
-            "Cita elektronika": { filterGroup: "general-filters" }
-        },
-        "Apģērbs": {
-            "Sievietēm": { filterGroup: "clothing-filters" },
-            "Vīriešiem": { filterGroup: "clothing-filters" },
-            "Bērniem (Apģērbs)": { filterGroup: "clothing-filters" },
-            "Sporta apģērbs": { filterGroup: "clothing-filters" },
-            "Apavi (vispārīgi)": { filterGroup: "clothing-filters" },
-            "Aksesuāri (vispārīgi)": { filterGroup: "general-filters" } // Varbūt specifiski aksesuāru filtri?
-        },
-        "Bērniem": {
-            "Bērnu transportlīdzekļi": { filterGroup: "baby-items-filters" },
-            "Bērnu mēbeles": { filterGroup: "baby-items-filters" },
-            "Rotaļlietas": { filterGroup: "baby-items-filters" },
-            "Barošana un aprūpe": { filterGroup: "baby-items-filters" },
-            "Grāmatas un mācību materiāli (bērniem)": { filterGroup: "general-filters" },
-            "Drošība bērniem": { filterGroup: "general-filters" },
-            "Cits bērniem": { filterGroup: "general-filters" }
-        },
-        "Izklaide sports": {
-            "Sports un fitnesa inventārs": { filterGroup: "sports-leisure-filters" },
-            "Mūzikas instrumenti un aprīkojums": { filterGroup: "general-filters" },
-            "Hobiji un amatniecība": { filterGroup: "general-filters" },
-            "Filmas, Mūzika, Grāmatas": { filterGroup: "general-filters" },
-            "Tūrisms un atpūta": { filterGroup: "sports-leisure-filters" },
-            "Medības un makšķerēšana": { filterGroup: "sports-leisure-filters" },
-            "Ballīšu un pasākumu preces": { filterGroup: "general-filters" },
-            "Cits izklaidei un sportam": { filterGroup: "general-filters" }
-        },
-        "Dzīvnieki": {
-            "Suņi": { filterGroup: "animals-filters" },
-            "Kaķi": { filterGroup: "animals-filters" },
-            "Mazie mājdzīvnieki (grauzēji, putni, zivis)": { filterGroup: "animals-filters" },
-            "Lauksaimniecības dzīvnieki (piederumi)": { filterGroup: "animals-filters" },
-            "Cits dzīvniekiem": { filterGroup: "general-filters" }
-        },
-        "Transports": {
-            "Vieglie auto": { filterGroup: "transport-filters" }, // Jūsu esošais filtrs
-            "Smagais transports": { filterGroup: "general-filters" }, // Varbūt izveidot "heavy-transport-filters"?
-            "Motocikli un motorolleri": { filterGroup: "general-filters" }, // Varbūt "moto-filters"?
-            "Velosipēdi": { filterGroup: "general-filters" }, // Varbūt "bike-filters"?
-            "Laivas un ūdens transports": { filterGroup: "general-filters" }, // Varbūt "boat-filters"?
-            "Rezerves daļas un aksesuāri (visiem transportlīdzekļiem, izņemot vieglos auto)": { filterGroup: "general-filters" },
-            "Cits transports": { filterGroup: "general-filters" }
-        },
-        "Pakalpojumi": {
-            "Remonts un uzstādīšana": { filterGroup: "services-filters" },
-            "Skaistumkopšana un veselība": { filterGroup: "services-filters" },
-            "Mācības un kursi": { filterGroup: "services-filters" },
-            "Noma": { filterGroup: "services-filters" },
-            "Pasākumu organizēšana": { filterGroup: "services-filters" },
-            "Tīrīšana un uzkopšana": { filterGroup: "services-filters" },
-            "Cits pakalpojumiem": { filterGroup: "services-filters" }
-        }
-    };
-
-    // Palīgfunkcija, kas aizpilda <select> laukus
+    // Funkcija, kas aizpilda <select> laukus
     function populateSelect(selectElement, items, defaultOptionText) {
         selectElement.innerHTML = `<option value="" disabled selected>${defaultOptionText}</option>`;
         if (!items || items.length === 0) {
             selectElement.style.display = 'none';
-            // Also hide the corresponding label if the select is hidden
             const label = document.querySelector(`label[for="${selectElement.id}"]`);
             if (label) label.style.display = 'none';
             return;
         }
-        selectElement.style.display = 'block'; // Ensure it's visible if there are items
+        selectElement.style.display = 'block';
         const label = document.querySelector(`label[for="${selectElement.id}"]`);
         if (label) label.style.display = 'block';
 
         items.forEach(item => {
             const option = document.createElement('option');
-            // If item is an object (for nested categories), use its key as value and display name
-            option.value = typeof item === 'object' ? Object.keys(item)[0] : item;
-            option.textContent = typeof item === 'object' ? Object.keys(item)[0] : item;
+            option.value = item.id; // Tagad vērtība ir ID no datubāzes
+            option.textContent = item.name;
+            // Store filterGroup as a data attribute for later retrieval
+            if (item.filterGroup) {
+                option.dataset.filterGroup = item.filterGroup;
+            }
             selectElement.appendChild(option);
         });
     }
@@ -875,18 +771,35 @@
 
     // Funkcija, kas parāda attiecīgo filtru grupu
     function showFilterGroup(groupId) {
-        hideAllFilterGroups(); // Paslēpj visas, tad parāda vajadzīgo
+        hideAllFilterGroups();
         const targetGroup = document.getElementById(groupId);
         if (targetGroup) {
             targetGroup.style.display = 'block';
         }
     }
 
+    // Funkcija, kas ielādē apakškategorijas no servera
+    async function fetchCategories(parentId = null) {
+        try {
+            const url = parentId ? `/api/categories/${parentId}/subcategories` : '/api/categories';
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error('Error fetching categories:', error);
+            return [];
+        }
+    }
+
     // Funkcija, kas atjauno apakškategoriju laukus un parāda filtrus
-    function updateSubcategories(level, selectedValue) {
-        let currentLevelData;
-        let nextLevelSelect;
-        let nextLevelLabel;
+    async function updateSubcategories(level, selectedId) {
+        let currentSelect;
+        let nextSelect;
+        let nextLabel;
+        let items = [];
 
         // Reset lower level selects and labels
         for (let i = level + 1; i <= 3; i++) {
@@ -894,154 +807,169 @@
             const label = document.querySelector(`label[for="subcategory${i}"]`);
             select.innerHTML = `<option value="" disabled selected>Vispirms izvēlies ${i === 2 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}</option>`;
             select.style.display = 'none';
-            label.style.display = 'none';
+            if (label) label.style.display = 'none';
         }
         hideAllFilterGroups(); // Hide all filters when category changes
 
         if (level === 0) { // Main category change
-            currentLevelData = fullCategoryData[selectedValue];
-            nextLevelSelect = subcategorySelect1;
-            nextLevelLabel = subcategoryLabel1;
+            currentSelect = categorySelect;
+            nextSelect = subcategorySelect1;
+            nextLabel = subcategoryLabel1;
+            items = await fetchCategories(selectedId);
         } else if (level === 1) { // Subcategory 1 change
-            currentLevelData = fullCategoryData[categorySelect.value][selectedValue];
-            nextLevelSelect = subcategorySelect2;
-            nextLevelLabel = subcategoryLabel2;
+            currentSelect = subcategorySelect1;
+            nextSelect = subcategorySelect2;
+            nextLabel = subcategoryLabel2;
+            items = await fetchCategories(selectedId);
         } else if (level === 2) { // Subcategory 2 change
-            currentLevelData = fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue];
-            nextLevelSelect = subcategorySelect3;
-            nextLevelLabel = subcategoryLabel3;
-        } else { // Deepest level, display filters if any
-            const finalCategory = currentLevelData || {}; // Should be an object with filterGroup
-            if (finalCategory.filterGroup) {
-                showFilterGroup(finalCategory.filterGroup);
+            currentSelect = subcategorySelect2;
+            nextSelect = subcategorySelect3;
+            nextLabel = subcategoryLabel3;
+            items = await fetchCategories(selectedId);
+        } else { // Deepest level reached, determine filter group
+            const selectedOption = currentSelect.querySelector(`option[value="${selectedId}"]`);
+            const filterGroup = selectedOption ? selectedOption.dataset.filterGroup : null;
+            
+            if (filterGroup) {
+                showFilterGroup(filterGroup);
                 // Handle specific logic for "Vieglie auto"
-                if (finalCategory.filterGroup === 'transport-filters' && selectedValue === 'Vieglie auto') {
+                if (filterGroup === 'transport-filters' && selectedOption.textContent === 'Vieglie auto') {
                     if (Object.keys(carBrandAndModelData).length > 0) {
                         const carBrands = Object.keys(carBrandAndModelData);
-                        populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
+                        populateSelect(carBrandSelect, carBrands.map(name => ({id: name, name: name})), "Izvēlies marku...");
                     } else {
                         carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
                     }
                     carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
                 }
             } else {
-                showFilterGroup('general-filters'); // Default to general filters if no specific group is defined
+                showFilterGroup('general-filters'); // Default
             }
             return;
         }
 
-        if (currentLevelData && Object.keys(currentLevelData).length > 0) {
-            const nextLevelItems = Object.keys(currentLevelData);
-            populateSelect(nextLevelSelect, nextLevelItems, `Izvēlies ${level === 0 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}...`);
-            nextLevelLabel.style.display = 'block'; // Show the label
+        if (items.length > 0) {
+            populateSelect(nextSelect, items, `Izvēlies ${level === 0 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}...`);
         } else {
-            // No further subcategories, this is a leaf node. Check for filterGroup.
-            let finalCategory;
-            if (level === 1) {
-                finalCategory = fullCategoryData[categorySelect.value][selectedValue];
-            } else if (level === 2) {
-                finalCategory = fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue];
-            }
+            // If no subcategories, this level is the leaf node. Check for filterGroup.
+            const selectedOption = currentSelect.querySelector(`option[value="${selectedId}"]`);
+            const filterGroup = selectedOption ? selectedOption.dataset.filterGroup : null;
             
-            if (finalCategory && finalCategory.filterGroup) {
-                showFilterGroup(finalCategory.filterGroup);
-                // Handle specific logic for "Vieglie auto" (again for direct selection)
-                if (finalCategory.filterGroup === 'transport-filters' && selectedValue === 'Vieglie auto') {
-                    if (Object.keys(carBrandAndModelData).length > 0) {
+            if (filterGroup) {
+                showFilterGroup(filterGroup);
+                if (filterGroup === 'transport-filters' && selectedOption.textContent === 'Vieglie auto') {
+                     if (Object.keys(carBrandAndModelData).length > 0) {
                         const carBrands = Object.keys(carBrandAndModelData);
-                        populateSelect(carBrandSelect, carBrands, "Izvēlies marku...");
+                        populateSelect(carBrandSelect, carBrands.map(name => ({id: name, name: name})), "Izvēlies marku...");
                     } else {
                         carBrandSelect.innerHTML = '<option>Dati nav pieejami</option>';
                     }
                     carModelSelect.innerHTML = '<option value="" disabled selected>Vispirms izvēlies marku</option>';
                 }
             } else {
-                showFilterGroup('general-filters'); // Default to general filters
+                showFilterGroup('general-filters');
             }
         }
     }
 
 
     // Galvenā loģika, kas sākas, kad lapa ir ielādējusies
-    document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', async () => {
         // Ielādējam sagatavotos auto datus no servera static mapes
-        fetch('/static/car_data.json')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Tīkla atbilde nebija veiksmīga');
-                }
-                return response.json();
-            })
-            .then(data => {
-                carBrandAndModelData = data;
-                console.log("Auto marku un modeļu dati veiksmīgi ielādēti.");
-                // Tikai pēc datu ielādes aktivizējam filtru loģiku
-                initializeFilters();
-            })
-            .catch(error => {
-                console.error('Kļūda, ielādējot auto datus:', error);
-                // Parāda lietotājam kļūdas paziņojumu, ja dati nav atrasti
-                carBrandSelect.innerHTML = '<option>Kļūda: Nevarēja ielādēt marku sarakstu.</option>';
-                initializeFilters(); // Turpināt ar filtru inicializāciju pat, ja dati nav ielādēti
-            });
+        try {
+            const carDataResponse = await fetch('/static/car_data.json');
+            if (!carDataResponse.ok) throw new Error('Network response was not ok for car data');
+            carBrandAndModelData = await carDataResponse.json();
+            console.log("Auto marku un modeļu dati veiksmīgi ielādēti.");
+        } catch (error) {
+            console.error('Error loading car data:', error);
+            carBrandSelect.innerHTML = '<option>Error: Could not load car brand list.</option>';
+        }
+
+        // Ielādējam galvenās kategorijas no servera
+        try {
+            const mainCategories = await fetchCategories(); // No parentId means fetch top-level
+            populateSelect(categorySelect, mainCategories, "Izvēlies kategoriju...");
+        } catch (error) {
+            console.error('Error loading main categories:', error);
+            categorySelect.innerHTML = '<option>Error: Could not load categories.</option>';
+        }
+
+        initializeFilters(); // Iestatām notikumu klausītājus
     });
 
     // Funkcija, kas iestata visus notikumu klausītājus (event listeners)
     function initializeFilters() {
-        // Aizpilda galvenās kategorijas
-        populateSelect(categorySelect, Object.keys(fullCategoryData), "Izvēlies kategoriju...");
         hideAllFilterGroups(); // Sākumā paslēpj visus filtrus
 
-        // Notikumu klausītāji kategoriju atlasei
-        categorySelect.addEventListener('change', () => {
-            updateSubcategories(0, categorySelect.value);
-            // Reset lower level selects and their visibility
-            subcategorySelect2.style.display = 'none';
-            subcategoryLabel2.style.display = 'none';
-            subcategorySelect3.style.display = 'none';
-            subcategoryLabel3.style.display = 'none';
-        });
+        categorySelect.addEventListener('change', () => updateSubcategories(0, categorySelect.value));
+        subcategorySelect1.addEventListener('change', () => updateSubcategories(1, subcategorySelect1.value));
+        subcategorySelect2.addEventListener('change', () => updateSubcategories(2, subcategorySelect2.value));
+        subcategorySelect3.addEventListener('change', () => updateSubcategories(3, subcategorySelect3.value));
 
-        subcategorySelect1.addEventListener('change', () => {
-            updateSubcategories(1, subcategorySelect1.value);
-            // Reset lower level selects and their visibility
-            subcategorySelect3.style.display = 'none';
-            subcategoryLabel3.style.display = 'none';
-        });
-
-        subcategorySelect2.addEventListener('change', () => {
-            updateSubcategories(2, subcategorySelect2.value);
-        });
-
-        subcategorySelect3.addEventListener('change', () => {
-            // This is the deepest level, now we determine the filter group
-            const selectedCategory = categorySelect.value;
-            const selectedSubcategory1 = subcategorySelect1.value;
-            const selectedSubcategory2 = subcategorySelect2.value;
-            const selectedSubcategory3 = subcategorySelect3.value;
-
-            let currentLevel = fullCategoryData[selectedCategory];
-            if (currentLevel && currentLevel[selectedSubcategory1]) {
-                currentLevel = currentLevel[selectedSubcategory1];
-                if (currentLevel && currentLevel[selectedSubcategory2]) {
-                    currentLevel = currentLevel[selectedSubcategory2];
-                    if (currentLevel && currentLevel[selectedSubcategory3] && currentLevel[selectedSubcategory3].filterGroup) {
-                        showFilterGroup(currentLevel[selectedSubcategory3].filterGroup);
-                    } else {
-                        showFilterGroup('general-filters'); // Default if no specific filterGroup
-                    }
-                }
-            }
-        });
-
-
-        // Auto markas un modeļa atlases loģika (esošā)
         carBrandSelect.addEventListener('change', () => {
             const selectedBrand = carBrandSelect.value;
             const models = carBrandAndModelData[selectedBrand] || [];
-            populateSelect(carModelSelect, models, "Izvēlies modeli...");
+            populateSelect(carModelSelect, models.map(name => ({id: name, name: name})), "Izvēlies modeli...");
         });
     }
+
+    // Forma iesniegšanas loģika
+    document.querySelector('form').addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const data = {};
+
+        // Collect all form data, including dynamically shown fields
+        for (let [key, value] of formData.entries()) {
+            // Handle multiple checkboxes for car_extras
+            if (key === 'car_extras') {
+                if (!data[key]) {
+                    data[key] = [];
+                }
+                data[key].push(value);
+            } else {
+                data[key] = value;
+            }
+        }
+
+        // Determine the final category_id
+        let finalCategoryId = null;
+        if (subcategorySelect3.value) {
+            finalCategoryId = subcategorySelect3.value;
+        } else if (subcategorySelect2.value) {
+            finalCategoryId = subcategorySelect2.value;
+        } else if (subcategorySelect1.value) {
+            finalCategoryId = subcategorySelect1.value;
+        } else if (categorySelect.value) {
+            finalCategoryId = categorySelect.value;
+        }
+        data.category_id = finalCategoryId; // Pievienojam datu bāzes ID
+
+        try {
+            const response = await fetch('/api/ads', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (response.ok) {
+                alert(result.message);
+                event.target.reset(); // Notīra formu
+                // Reset category selects and hide filters
+                categorySelect.selectedIndex = 0;
+                updateSubcategories(0, '');
+            } else {
+                alert(`Kļūda: ${result.error}`);
+            }
+        } catch (error) {
+            console.error('Kļūda, sūtot sludinājumu:', error);
+            alert('Neizdevās iesniegt sludinājumu. Lūdzu, mēģiniet vēlreiz.');
+        }
+    });
+
   </script>
 </body>
 </html>
