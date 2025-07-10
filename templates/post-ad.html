@@ -443,7 +443,6 @@
             <label for="extra-adaptīvās-tālās-gaismas">Adaptīvās tālās gaismas</label>
           </div>
         </div>
-      </div>
 
       <div id="general-filters" class="filter-group">
           <h2>Vispārīgie parametri</h2>
@@ -474,6 +473,19 @@
 
         <label for="electronics-storage">Atmiņa (GB)</label>
         <input type="number" id="electronics-storage" name="electronics_storage" placeholder="Piem., 128, 256">
+        
+        <label for="electronics-screen-size">Ekrāna izmērs (collas)</label>
+        <input type="number" id="electronics-screen-size" name="electronics_screen_size" placeholder="Piem., 6.1, 15.6">
+
+        <label for="electronics-condition">Stāvoklis</label>
+        <select id="electronics-condition" name="electronics_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
       </div>
       
       <div id="clothing-filters" class="filter-group">
@@ -489,6 +501,188 @@
             <option value="bernu">Bērniem</option>
             <option value="unisex">Unisex</option>
         </select>
+
+        <label for="clothing-material">Materiāls</label>
+        <input type="text" id="clothing-material" name="clothing_material" placeholder="Piem., kokvilna, džinss, vilna">
+
+        <label for="clothing-season">Sezona</label>
+        <select id="clothing-season" name="clothing_season">
+            <option value="" disabled selected>Izvēlies sezonu</option>
+            <option value="vasara">Vasara</option>
+            <option value="rudens">Rudens</option>
+            <option value="ziema">Ziema</option>
+            <option value="pavasaris">Pavasaris</option>
+            <option value="universala">Universāla</option>
+        </select>
+
+        <label for="clothing-condition">Stāvoklis</label>
+        <select id="clothing-condition" name="clothing_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="furniture-filters" class="filter-group">
+        <h2>Mēbeļu parametri</h2>
+        <label for="furniture-material">Materiāls</label>
+        <input type="text" id="furniture-material" name="furniture_material" placeholder="Piem., koks, metāls, audums">
+
+        <label for="furniture-color">Krāsa</label>
+        <input type="text" id="furniture-color" name="furniture_color" placeholder="Piem., balta, brūna, pelēka">
+        
+        <label for="furniture-style">Stils</label>
+        <input type="text" id="furniture-style" name="furniture_style" placeholder="Piem., moderns, klasisks, retro">
+
+        <label for="furniture-dimensions">Izmēri (PxGxDz cm)</label>
+        <input type="text" id="furniture-dimensions" name="furniture_dimensions" placeholder="Piem., 200x90x80">
+
+        <label for="furniture-condition">Stāvoklis</label>
+        <select id="furniture-condition" name="furniture_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="home-appliances-filters" class="filter-group">
+        <h2>Sadzīves tehnikas parametri</h2>
+        <label for="appliance-brand">Zīmols</label>
+        <input type="text" id="appliance-brand" name="appliance_brand" placeholder="Piem., Bosch, Electrolux">
+
+        <label for="appliance-model">Modelis</label>
+        <input type="text" id="appliance-model" name="appliance_model" placeholder="Piem., WAU28T64GB, EW7F384SC">
+
+        <label for="appliance-energy-class">Energoefektivitātes klase</label>
+        <select id="appliance-energy-class" name="appliance_energy_class">
+            <option value="" disabled selected>Izvēlies klasi</option>
+            <option value="A+++">A+++</option>
+            <option value="A++">A++</option>
+            <option value="A+">A+</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+
+        <label for="appliance-capacity">Ietilpība/Tilpums</label>
+        <input type="text" id="appliance-capacity" name="appliance_capacity" placeholder="Piem., 7 kg (veļas mašīnai), 250L (ledusskapim)">
+
+        <label for="appliance-condition">Stāvoklis</label>
+        <select id="appliance-condition" name="appliance_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="tools-equipment-filters" class="filter-group">
+        <h2>Instrumentu un tehnikas parametri</h2>
+        <label for="tool-type">Tips</label>
+        <input type="text" id="tool-type" name="tool_type" placeholder="Piem., Urbjmašīna, Kompresors">
+
+        <label for="tool-brand">Zīmols</label>
+        <input type="text" id="tool-brand" name="tool_brand" placeholder="Piem., Makita, Stihl">
+
+        <label for="tool-power">Jauda/Spriegums</label>
+        <input type="text" id="tool-power" name="tool_power" placeholder="Piem., 18V, 2.2kW">
+
+        <label for="tool-condition">Stāvoklis</label>
+        <select id="tool-condition" name="tool_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="baby-items-filters" class="filter-group">
+        <h2>Bērnu preču parametri</h2>
+        <label for="baby-age">Vecums (gadi)</label>
+        <input type="number" id="baby-age" name="baby_age" placeholder="Piem., 0-3, 3-6">
+
+        <label for="baby-weight">Svars (kg)</label>
+        <input type="number" id="baby-weight" name="baby_weight" placeholder="Piem., 0-13, 9-18">
+
+        <label for="baby-brand">Zīmols</label>
+        <input type="text" id="baby-brand" name="baby_brand" placeholder="Piem., Chicco, Cybex">
+
+        <label for="baby-condition">Stāvoklis</label>
+        <select id="baby-condition" name="baby_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="sports-leisure-filters" class="filter-group">
+        <h2>Sporta un brīvā laika parametri</h2>
+        <label for="sport-type">Sporta veids</label>
+        <input type="text" id="sport-type" name="sport_type" placeholder="Piem., futbols, riteņbraukšana, fitness">
+
+        <label for="sport-brand">Zīmols</label>
+        <input type="text" id="sport-brand" name="sport_brand" placeholder="Piem., Nike, Adidas, Salomon">
+
+        <label for="sport-size">Izmērs</label>
+        <input type="text" id="sport-size" name="sport_size" placeholder="Piem., L, 43, 20 collas">
+
+        <label for="sport-condition">Stāvoklis</label>
+        <select id="sport-condition" name="sport_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="animals-filters" class="filter-group">
+        <h2>Dzīvnieku preču parametri</h2>
+        <label for="animal-type">Dzīvnieka veids</label>
+        <input type="text" id="animal-type" name="animal_type" placeholder="Piem., suns, kaķis, zivtiņa">
+
+        <label for="animal-breed">Šķirne (suņiem, kaķiem)</label>
+        <input type="text" id="animal-breed" name="animal_breed" placeholder="Piem., Labradors, Siāmietis">
+
+        <label for="animal-size">Izmērs (produktam)</label>
+        <input type="text" id="animal-size" name="animal_size" placeholder="Piem., S, M, L (apģērbs, gultas)">
+
+        <label for="animal-condition">Stāvoklis</label>
+        <select id="animal-condition" name="animal_condition">
+            <option value="" disabled selected>Izvēlies stāvokli</option>
+            <option value="jauns">Jauns</option>
+            <option value="gandrīz-jauns">Gandrīz jauns</option>
+            <option value="lietots-labs">Lietots (labs stāvoklis)</option>
+            <option value="lietots-viduvējs">Lietots (viduvējs stāvoklis)</option>
+            <option value="bojats">Bojāts (rezerves daļām)</option>
+        </select>
+      </div>
+
+      <div id="services-filters" class="filter-group">
+        <h2>Pakalpojuma parametri</h2>
+        <label for="service-type">Pakalpojuma veids</label>
+        <input type="text" id="service-type" name="service_type" placeholder="Piem., Auto remonts, Frizieris">
+
+        <label for="service-location">Atrašanās vieta</label>
+        <input type="text" id="service-location" name="service_location" placeholder="Piem., Rīga, Centrs">
+
+        <label for="service-availability">Pieejamība</label>
+        <input type="text" id="service-availability" name="service_availability" placeholder="Piem., darba dienās, vakaros, pēc vienošanās">
       </div>
 
       <h2>Sludinājuma apraksts</h2>
@@ -526,9 +720,18 @@
     const carBrandSelect = document.getElementById('car-brand');
     const carModelSelect = document.getElementById('car-model');
 
-    const generalFilters = document.getElementById('general-filters'); // Vispārīgie filtri
-    const electronicsFilters = document.getElementById('electronics-filters'); // Elektronikas filtri
-    const clothingFilters = document.getElementById('clothing-filters'); // Apģērba filtri
+    // Jaunās filtru grupas
+    const generalFilters = document.getElementById('general-filters');
+    const electronicsFilters = document.getElementById('electronics-filters');
+    const clothingFilters = document.getElementById('clothing-filters');
+    const furnitureFilters = document.getElementById('furniture-filters');
+    const homeAppliancesFilters = document.getElementById('home-appliances-filters');
+    const toolsEquipmentFilters = document.getElementById('tools-equipment-filters');
+    const babyItemsFilters = document.getElementById('baby-items-filters');
+    const sportsLeisureFilters = document.getElementById('sports-leisure-filters');
+    const animalsFilters = document.getElementById('animals-filters');
+    const servicesFilters = document.getElementById('services-filters');
+
 
     // Datu krātuve, kas tiks aizpildīta no JSON faila (auto markām/modeļiem)
     let carBrandAndModelData = {};
@@ -537,30 +740,30 @@
     const fullCategoryData = {
         "Māja": {
             "Mēbeles": {
-                "Dīvāni un atpūtas krēsli": { filterGroup: "general-filters" },
-                "Gultas un matrači": { filterGroup: "general-filters" },
-                "Skapji un kumodes": { filterGroup: "general-filters" },
-                "Galdi un krēsli": { filterGroup: "general-filters" },
-                "Plaukti": { filterGroup: "general-filters" },
-                "Bērnu mēbeles": { filterGroup: "general-filters" },
-                "Biroja mēbeles": { filterGroup: "general-filters" },
-                "Dārza mēbeles": { filterGroup: "general-filters" },
-                "Virtuves mēbeles": { filterGroup: "general-filters" },
+                "Dīvāni un atpūtas krēsli": { filterGroup: "furniture-filters" },
+                "Gultas un matrači": { filterGroup: "furniture-filters" },
+                "Skapji un kumodes": { filterGroup: "furniture-filters" },
+                "Galdi un krēsli": { filterGroup: "furniture-filters" },
+                "Plaukti": { filterGroup: "furniture-filters" },
+                "Bērnu mēbeles": { filterGroup: "furniture-filters" },
+                "Biroja mēbeles": { filterGroup: "furniture-filters" },
+                "Dārza mēbeles": { filterGroup: "furniture-filters" },
+                "Virtuves mēbeles": { filterGroup: "furniture-filters" },
                 "Citas mēbeles": { filterGroup: "general-filters" }
             },
             "Sadzīves tehnika": {
-                "Veļas mašīnas": { filterGroup: "electronics-filters" },
-                "Žāvētāji": { filterGroup: "electronics-filters" },
-                "Ledusskapji": { filterGroup: "electronics-filters" },
-                "Saldētavas": { filterGroup: "electronics-filters" },
-                "Plītis un cepeškrāsnis": { filterGroup: "electronics-filters" },
-                "Trauku mazgājamās mašīnas": { filterGroup: "electronics-filters" },
-                "Mazā virtuves tehnika": { filterGroup: "electronics-filters" },
-                "Putekļsūcēji": { filterGroup: "electronics-filters" },
-                "Gludekļi": { filterGroup: "electronics-filters" },
-                "Apkures ierīces": { filterGroup: "electronics-filters" },
-                "Gaisa kondicionieri": { filterGroup: "electronics-filters" },
-                "Cita sadzīves tehnika": { filterGroup: "electronics-filters" }
+                "Veļas mašīnas": { filterGroup: "home-appliances-filters" },
+                "Žāvētāji": { filterGroup: "home-appliances-filters" },
+                "Ledusskapji": { filterGroup: "home-appliances-filters" },
+                "Saldētavas": { filterGroup: "home-appliances-filters" },
+                "Plītis un cepeškrāsnis": { filterGroup: "home-appliances-filters" },
+                "Trauku mazgājamās mašīnas": { filterGroup: "home-appliances-filters" },
+                "Mazā virtuves tehnika": { filterGroup: "home-appliances-filters" },
+                "Putekļsūcēji": { filterGroup: "home-appliances-filters" },
+                "Gludekļi": { filterGroup: "home-appliances-filters" },
+                "Apkures ierīces": { filterGroup: "home-appliances-filters" },
+                "Gaisa kondicionieri": { filterGroup: "home-appliances-filters" },
+                "Cita sadzīves tehnika": { filterGroup: "general-filters" }
             },
             "Virtuves piederumi un trauki": { filterGroup: "general-filters" },
             "Tekstils un interjers": { filterGroup: "general-filters" },
@@ -571,10 +774,10 @@
         },
         "Celtniecība": {
             "Celtniecības materiāli": { filterGroup: "general-filters" },
-            "Darbarīki": { filterGroup: "general-filters" },
+            "Darbarīki": { filterGroup: "tools-equipment-filters" },
             "Santehnika un apkure (celtniecības kontekstā)": { filterGroup: "general-filters" },
             "Elektroinstalācija": { filterGroup: "general-filters" },
-            "Celtniecības tehnika": { filterGroup: "general-filters" },
+            "Celtniecības tehnika": { filterGroup: "tools-equipment-filters" },
             "Darba apģērbs un drošība": { filterGroup: "clothing-filters" }, // Var izmantot clothing-filters ar specifiku
             "Cits celtniecībai": { filterGroup: "general-filters" }
         },
@@ -596,59 +799,65 @@
             "Aksesuāri (vispārīgi)": { filterGroup: "general-filters" } // Varbūt specifiski aksesuāru filtri?
         },
         "Bērniem": {
-            "Bērnu transportlīdzekļi": { filterGroup: "general-filters" },
-            "Bērnu mēbeles": { filterGroup: "general-filters" },
-            "Rotaļlietas": { filterGroup: "general-filters" },
-            "Barošana un aprūpe": { filterGroup: "general-filters" },
+            "Bērnu transportlīdzekļi": { filterGroup: "baby-items-filters" },
+            "Bērnu mēbeles": { filterGroup: "baby-items-filters" },
+            "Rotaļlietas": { filterGroup: "baby-items-filters" },
+            "Barošana un aprūpe": { filterGroup: "baby-items-filters" },
             "Grāmatas un mācību materiāli (bērniem)": { filterGroup: "general-filters" },
             "Drošība bērniem": { filterGroup: "general-filters" },
             "Cits bērniem": { filterGroup: "general-filters" }
         },
         "Izklaide sports": {
-            "Sports un fitnesa inventārs": { filterGroup: "general-filters" },
+            "Sports un fitnesa inventārs": { filterGroup: "sports-leisure-filters" },
             "Mūzikas instrumenti un aprīkojums": { filterGroup: "general-filters" },
             "Hobiji un amatniecība": { filterGroup: "general-filters" },
             "Filmas, Mūzika, Grāmatas": { filterGroup: "general-filters" },
-            "Tūrisms un atpūta": { filterGroup: "general-filters" },
-            "Medības un makšķerēšana": { filterGroup: "general-filters" },
+            "Tūrisms un atpūta": { filterGroup: "sports-leisure-filters" },
+            "Medības un makšķerēšana": { filterGroup: "sports-leisure-filters" },
             "Ballīšu un pasākumu preces": { filterGroup: "general-filters" },
             "Cits izklaidei un sportam": { filterGroup: "general-filters" }
         },
         "Dzīvnieki": {
-            "Suņi": { filterGroup: "general-filters" },
-            "Kaķi": { filterGroup: "general-filters" },
-            "Mazie mājdzīvnieki (grauzēji, putni, zivis)": { filterGroup: "general-filters" },
-            "Lauksaimniecības dzīvnieki (piederumi)": { filterGroup: "general-filters" },
+            "Suņi": { filterGroup: "animals-filters" },
+            "Kaķi": { filterGroup: "animals-filters" },
+            "Mazie mājdzīvnieki (grauzēji, putni, zivis)": { filterGroup: "animals-filters" },
+            "Lauksaimniecības dzīvnieki (piederumi)": { filterGroup: "animals-filters" },
             "Cits dzīvniekiem": { filterGroup: "general-filters" }
         },
         "Transports": {
-            "Vieglie auto": { filterGroup: "transport-filters" }, // Specifiskais auto filtrs
-            "Smagais transports": { filterGroup: "general-filters" },
-            "Motocikli un motorolleri": { filterGroup: "general-filters" }, // Varbūt savs filtrs?
-            "Velosipēdi": { filterGroup: "general-filters" },
-            "Laivas un ūdens transports": { filterGroup: "general-filters" },
+            "Vieglie auto": { filterGroup: "transport-filters" }, // Jūsu esošais filtrs
+            "Smagais transports": { filterGroup: "general-filters" }, // Varbūt izveidot "heavy-transport-filters"?
+            "Motocikli un motorolleri": { filterGroup: "general-filters" }, // Varbūt "moto-filters"?
+            "Velosipēdi": { filterGroup: "general-filters" }, // Varbūt "bike-filters"?
+            "Laivas un ūdens transports": { filterGroup: "general-filters" }, // Varbūt "boat-filters"?
             "Rezerves daļas un aksesuāri (visiem transportlīdzekļiem, izņemot vieglos auto)": { filterGroup: "general-filters" },
             "Cits transports": { filterGroup: "general-filters" }
         },
         "Pakalpojumi": {
-            "Remonts un uzstādīšana": { filterGroup: "general-filters" },
-            "Skaistumkopšana un veselība": { filterGroup: "general-filters" },
-            "Mācības un kursi": { filterGroup: "general-filters" },
-            "Noma": { filterGroup: "general-filters" },
-            "Pasākumu organizēšana": { filterGroup: "general-filters" },
-            "Tīrīšana un uzkopšana": { filterGroup: "general-filters" },
-            "Cits pakalpojumiem": { filterGroup: "general-filters" }
+            "Remonts un uzstādīšana": { filterGroup: "services-filters" },
+            "Skaistumkopšana un veselība": { filterGroup: "services-filters" },
+            "Mācības un kursi": { filterGroup: "services-filters" },
+            "Noma": { filterGroup: "services-filters" },
+            "Pasākumu organizēšana": { filterGroup: "services-filters" },
+            "Tīrīšana un uzkopšana": { filterGroup: "services-filters" },
+            "Cits pakalpojumiem": { filterGroup: "services-filters" }
         }
     };
 
     // Palīgfunkcija, kas aizpilda <select> laukus
     function populateSelect(selectElement, items, defaultOptionText) {
         selectElement.innerHTML = `<option value="" disabled selected>${defaultOptionText}</option>`;
-        if (!items) {
+        if (!items || items.length === 0) {
             selectElement.style.display = 'none';
+            // Also hide the corresponding label if the select is hidden
+            const label = document.querySelector(`label[for="${selectElement.id}"]`);
+            if (label) label.style.display = 'none';
             return;
         }
         selectElement.style.display = 'block'; // Ensure it's visible if there are items
+        const label = document.querySelector(`label[for="${selectElement.id}"]`);
+        if (label) label.style.display = 'block';
+
         items.forEach(item => {
             const option = document.createElement('option');
             // If item is an object (for nested categories), use its key as value and display name
@@ -673,7 +882,7 @@
         }
     }
 
-    // Funkcija, kas atjauno apakškategoriju laukus
+    // Funkcija, kas atjauno apakškategoriju laukus un parāda filtrus
     function updateSubcategories(level, selectedValue) {
         let currentLevelData;
         let nextLevelSelect;
@@ -726,13 +935,17 @@
             populateSelect(nextLevelSelect, nextLevelItems, `Izvēlies ${level === 0 ? 'apakškategoriju' : 'dziļāku apakškategoriju'}...`);
             nextLevelLabel.style.display = 'block'; // Show the label
         } else {
-            // No further subcategories, check if this is a leaf node with a filterGroup
-            const finalCategory = level === 1 ? fullCategoryData[categorySelect.value][selectedValue] : 
-                                level === 2 ? fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue] : 
-                                null;
+            // No further subcategories, this is a leaf node. Check for filterGroup.
+            let finalCategory;
+            if (level === 1) {
+                finalCategory = fullCategoryData[categorySelect.value][selectedValue];
+            } else if (level === 2) {
+                finalCategory = fullCategoryData[categorySelect.value][subcategorySelect1.value][selectedValue];
+            }
+            
             if (finalCategory && finalCategory.filterGroup) {
                 showFilterGroup(finalCategory.filterGroup);
-                 // Handle specific logic for "Vieglie auto" (again for direct selection)
+                // Handle specific logic for "Vieglie auto" (again for direct selection)
                 if (finalCategory.filterGroup === 'transport-filters' && selectedValue === 'Vieglie auto') {
                     if (Object.keys(carBrandAndModelData).length > 0) {
                         const carBrands = Object.keys(carBrandAndModelData);
