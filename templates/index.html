@@ -1,376 +1,382 @@
 <!DOCTYPE html>
 <html lang="lv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sludinājumi</title>
-  <style>
-    /* JŪSU ESOŠAIS STILS PALIEK ŠEIT */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #E0D3BC;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      color: #736C5B;
-    }
-    .logo-bar {
-      width: 100%;
-      background-color: #474737;
-      color: white;
-      text-align: center;
-      padding: 18px 0;
-      font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: 3px;
-      user-select: none;
-    }
-    nav {
-      margin: 15px 0 40px 0;
-      display: flex;
-      gap: 40px;
-      font-weight: 600;
-      font-size: 1.2rem;
-    }
-    nav a {
-      color: #474737;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 10px;
-      transition: background-color 0.3s ease;
-      cursor: pointer;
-    }
-    nav a:hover, nav a:focus {
-      background-color: #736C5B;
-      color: white;
-      outline: none;
-    }
-    .container {
-      background-color: #F0EDE1;
-      padding: 50px 60px;
-      border-radius: 15px;
-      max-width: 1000px;
-      width: 95%;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
-      text-align: center;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
-      color: #736C5B;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-    }
-    p {
-      font-size: 1.4rem;
-      margin-bottom: 45px;
-      color: #736C5B;
-      line-height: 1.6;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px 40px;
-      justify-items: center;
-    }
-    .card {
-      background-color: #CBD7B3;
-      border-radius: 15px;
-      padding: 25px 15px;
-      width: 180px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      user-select: none;
-      text-align: center;
-    }
-    .card:hover {
-      transform: translateY(-10px) scale(1.05);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-    }
-    .card img {
-      width: 70px;
-      height: 70px;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
-    }
-    .card h3 {
-      margin: 0;
-      font-size: 20px;
-      color: #474737;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-    }
-    .subcategories {
-      list-style-type: none;
-      padding: 0;
-      margin-top: 15px;
-      font-size: 0.9rem;
-      color: #3f3f2f;
-    }
-    .subcategories li {
-      margin: 4px 0;
-      transition: color 0.2s ease;
-      cursor: pointer;
-    }
-    .subcategories li:hover {
-      color: #000;
-      text-decoration: underline;
-    }
-    @media (max-width: 600px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-    @media (max-width: 400px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .card {
-        width: 100%;
-      }
-    }
-    
-    /* --- JAUNS STILS SĀKUMA LOGAM --- */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      opacity: 0; /* Sākumā neredzams */
-      visibility: hidden; /* Sākumā noslēpts */
-      transition: opacity 0.4s ease, visibility 0.4s ease;
-    }
-    .modal-overlay.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    .modal-content {
-      background-color: #F0EDE1;
-      padding: 40px 50px;
-      border-radius: 15px;
-      text-align: center;
-      max-width: 500px;
-      width: 90%;
-      box-shadow: 0 5px 25px rgba(0,0,0,0.2);
-      position: relative;
-      transform: scale(0.9); /* Sākuma animācijai */
-      transition: transform 0.4s ease;
-    }
-    .modal-overlay.active .modal-content {
-      transform: scale(1);
-    }
-    .modal-content h2 {
-      font-size: 2.5rem;
-      color: #474737;
-      margin-top: 0;
-      margin-bottom: 15px;
-    }
-    .modal-content p {
-        font-size: 1.1rem;
-        color: #736C5B;
-        margin-bottom: 30px;
-        line-height: 1.5;
-    }
-    .modal-button {
-      background-color: #736C5B;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      font-size: 1.2rem;
-      font-weight: 600;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .modal-button:hover {
-      background-color: #474737;
-      transform: scale(1.05);
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sludinājumi</title>
+    <style>
+        /* JŪSU ESOŠAIS STILS PALIEK ŠEIT */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #E0D3BC;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #736C5B;
+        }
+        .logo-bar {
+            width: 100%;
+            background-color: #474737;
+            color: white;
+            text-align: center;
+            padding: 18px 0;
+            font-weight: 700;
+            font-size: 1.8rem;
+            letter-spacing: 3px;
+            user-select: none;
+        }
+        nav {
+            margin: 15px 0 40px 0;
+            display: flex;
+            gap: 40px;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+        nav a {
+            color: #474737;
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+        nav a:hover, nav a:focus {
+            background-color: #736C5B;
+            color: white;
+            outline: none;
+        }
+        .container {
+            background-color: #F0EDE1;
+            padding: 50px 60px;
+            border-radius: 15px;
+            max-width: 1000px;
+            width: 95%;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+            text-align: center;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #736C5B;
+            font-weight: 700;
+            letter-spacing: 1.2px;
+        }
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 45px;
+            color: #736C5B;
+            line-height: 1.6;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px 40px;
+            justify-items: center;
+        }
+        .card {
+            background-color: #CBD7B3;
+            border-radius: 15px;
+            padding: 25px 15px;
+            width: 180px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            user-select: none;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+        .card img {
+            width: 70px;
+            height: 70px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        .card h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #474737;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .subcategories {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #3f3f2f;
+        }
+        .subcategories li {
+            margin: 4px 0;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+        .subcategories li:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 400px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .card {
+                width: 100%;
+            }
+        }
+        
+        /* --- JAUNS STILS SĀKUMA LOGAM --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0; /* Sākumā neredzams */
+            visibility: hidden; /* Sākumā noslēpts */
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            background-color: #F0EDE1;
+            padding: 40px 50px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            position: relative;
+            transform: scale(0.9); /* Sākuma animācijai */
+            transition: transform 0.4s ease;
+        }
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        .modal-content h2 {
+            font-size: 2.5rem;
+            color: #474737;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .modal-content p {
+            font-size: 1.1rem;
+            color: #736C5B;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        .modal-button {
+            background-color: #736C5B;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .modal-button:hover {
+            background-color: #474737;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
 
-  <div id="welcomeModal" class="modal-overlay">
-    <div class="modal-content">
-      <h2>Esi sveicināts!</h2>
-      <p>Šī ir tava jaunā sludinājumu lapa. Atrodi, pārdod un mainies ar lietām ērti un vienkārši. Lai sāktu, spied pogu zemāk.</p>
-      <button id="closeModalButton" class="modal-button">Skatīt sludinājumus</button>
+    <div id="welcomeModal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Esi sveicināts!</h2>
+            <p>Šī ir tava jaunā sludinājumu lapa. Atrodi, pārdod un mainies ar lietām ērti un vienkārši. Lai sāktu, spied pogu zemāk.</p>
+            <button id="closeModalButton" class="modal-button">Skatīt sludinājumus</button>
+        </div>
     </div>
-  </div>
 
 
-  <div class="logo-bar">
-    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 10px;">
-      <path d="M3 12 L12 3 L21 12 V21 H3z" />
-      <path d="M9 21 V12 H15 V21" />
-    </svg>
-    <span style="vertical-align: middle;">Deals</span>
-  </div>
+    <div class="logo-bar">
+        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 10px;">
+            <path d="M3 12 L12 3 L21 12 V21 H3z" />
+            <path d="M9 21 V12 H15 V21" />
+        </svg>
+        <span style="vertical-align: middle;">Deals</span>
+    </div>
 
-  <nav>
-    <a href="#">Sākums</a>
-    <a href="/iesniegt-sludinajumu">Iesniegt sludinājumu</a>
-    <a href="/profils">Profils</a>
-  </nav>
+    <nav>
+        <a href="#">Sākums</a>
+        <a href="/iesniegt-sludinajumu">Iesniegt sludinājumu</a>
+        <a href="/profils">Profils</a>
+    </nav>
 
-  <div class="container">
-    <h1>Laipni lūdzam vietējos sludinājumos</h1>
-    <p>Atrodi visu, kas vajadzīgs tavai ikdienai: no mēbelēm un elektronikas līdz pakalpojumiem.</p>
+    <div class="container">
+        <h1>Laipni lūdzam vietējos sludinājumos</h1>
+        <p>Atrodi visu, kas vajadzīgs tavai ikdienai: no mēbelēm un elektronikas līdz pakalpojumiem.</p>
 
-    <div class="grid">
+        <div class="grid">
 
-      <div class="card">
-        <img src="/static/images/1.png" alt="Mājai" />
-        <h3>Māja</h3>
-        <ul class="subcategories">
-          <li>Mēbeles un Interjers</li>
-          <li>Veselība un Skaistums</li>
-          <li>Dāvanas un Suvenīri</li>
-          <li>Antikvariāts un Kolekcionēšana</li>
-          <li>Mājas labiekārtošana</li>
-          <li>Mājsaimniecības preces</li>
-          <li>Citi mājai</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/1.png" alt="Māja" />
+                <h3>Māja</h3>
+                <ul class="subcategories">
+                    <li>Mēbeles</li>
+                    <li>Sadzīves tehnika</li>
+                    <li>Virtuves piederumi un trauki</li>
+                    <li>Tekstils un interjers</li>
+                    <li>Apgaismojums</li>
+                    <li>Dārzs un sēta</li>
+                    <li>Santehnika un vannas istabas aprīkojums</li>
+                    <li>Cits mājai</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/2.png" alt="Celtniecība" />
-        <h3>Celtniecība</h3>
-        <ul class="subcategories">
-          <li>Instrumenti un Tehnika</li>
-          <li>Celtniecības materiāli</li>
-          <li>Remonta pakalpojumi</li>
-          <li>Siltināšana</li>
-          <li>Santehnika un Elektrība</li>
-          <li>Cits celtniecībai</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/2.png" alt="Celtniecība" />
+                <h3>Celtniecība</h3>
+                <ul class="subcategories">
+                    <li>Celtniecības materiāli</li>
+                    <li>Darbarīki</li>
+                    <li>Santehnika un apkure (celtniecības kontekstā)</li>
+                    <li>Elektroinstalācija</li>
+                    <li>Celtniecības tehnika</li>
+                    <li>Darba apģērbs un drošība</li>
+                    <li>Cits celtniecībai</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/3.png" alt="Elektronika" />
-        <h3>Elektronika</h3>
-        <ul class="subcategories">
-          <li>Televizori un Audio</li>
-          <li>Datori un Aksesuāri</li>
-          <li>Telefoni</li>
-          <li>Virtuves tehnika</li>
-          <li>Sadzīves tehnika</li>
-          <li>Spēļu konsoles</li>
-          <li>Cita elektronika</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/3.png" alt="Elektronika" />
+                <h3>Elektronika</h3>
+                <ul class="subcategories">
+                    <li>Viedtālruņi un telefoni</li>
+                    <li>Datori un biroja tehnika</li>
+                    <li>Audio un video tehnika</li>
+                    <li>Spēļu konsoles un spēles</li>
+                    <li>Viedierīces un valkājamā elektronika</li>
+                    <li>Biroja preces</li>
+                    <li>Cita elektronika</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/4.png" alt="Apģērbs" />
-        <h3>Apģērbs</h3>
-        <ul class="subcategories">
-          <li>Sieviešu apģērbi</li>
-          <li>Vīriešu apģērbi</li>
-          <li>Apavi</li>
-          <li>Aksesuāri</li>
-          <li>Somu un mugursomas</li>
-          <li>Sporta apģērbs</li>
-          <li>Cits apģērbs</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/4.png" alt="Apģērbs" />
+                <h3>Apģērbs</h3>
+                <ul class="subcategories">
+                    <li>Sievietēm</li>
+                    <li>Vīriešiem</li>
+                    <li>Bērniem (Apģērbs)</li>
+                    <li>Sporta apģērbs</li>
+                    <li>Apavi (vispārīgi)</li>
+                    <li>Aksesuāri (vispārīgi)</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/5.png" alt="Bērni" />
-        <h3>Bērni</h3>
-        <ul class="subcategories">
-          <li>Apģērbi un apavi</li>
-          <li>Rotaļlietas</li>
-          <li>Ratiņi un autokrēsli</li>
-          <li>Skolas preces</li>
-          <li>Mēbeles bērniem</li>
-          <li>Grāmatas bērniem</li>
-          <li>Citi bērnu piederumi</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/5.png" alt="Bērni" />
+                <h3>Bērniem</h3>
+                <ul class="subcategories">
+                    <li>Bērnu transportlīdzekļi</li>
+                    <li>Bērnu mēbeles</li>
+                    <li>Rotaļlietas</li>
+                    <li>Barošana un aprūpe</li>
+                    <li>Grāmatas un mācību materiāli (bērniem)</li>
+                    <li>Drošība bērniem</li>
+                    <li>Cits bērniem</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/6.png" alt="Izklaide un sports" />
-        <h3>Izklaide un sports</h3>
-        <ul class="subcategories">
-          <li>Sporta inventārs</li>
-          <li>Mūzikas instrumenti</li>
-          <li>Filmas un spēles</li>
-          <li>Grāmatas un žurnāli</li>
-          <li>Kolekcijas un hobiji</li>
-          <li>Biļetes un pasākumi</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/6.png" alt="Izklaide un sports" />
+                <h3>Izklaide un sports</h3>
+                <ul class="subcategories">
+                    <li>Sports un fitnesa inventārs</li>
+                    <li>Mūzikas instrumenti un aprīkojums</li>
+                    <li>Hobiji un amatniecība</li>
+                    <li>Filmas, Mūzika, Grāmatas</li>
+                    <li>Tūrisms un atpūta</li>
+                    <li>Medības un makšķerēšana</li>
+                    <li>Ballīšu un pasākumu preces</li>
+                    <li>Cits izklaidei un sportam</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/7.png" alt="Dzīvnieki" />
-        <h3>Dzīvnieki</h3>
-        <ul class="subcategories">
-          <li>Suņi</li>
-          <li>Kaķi</li>
-          <li>Putni</li>
-          <li>Akvāriji un zivis</li>
-          <li>Barība un aksesuāri</li>
-          <li>Citi dzīvnieki</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/7.png" alt="Dzīvnieki" />
+                <h3>Dzīvnieki</h3>
+                <ul class="subcategories">
+                    <li>Suņi</li>
+                    <li>Kaķi</li>
+                    <li>Mazie mājdzīvnieki (grauzēji, putni, zivis)</li>
+                    <li>Lauksaimniecības dzīvnieki (piederumi)</li>
+                    <li>Cits dzīvniekiem</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/8.png" alt="Transports" />
-        <h3>Transports</h3>
-        <ul class="subcategories">
-          <li>Vieglie auto</li>
-          <li>Velosipēdi un skrejriteņi</li>
-          <li>Rezerves daļas</li>
-          <li>Auto piederumi</li>
-          <li>Remonta pakalpojumi</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/8.png" alt="Transports" />
+                <h3>Transports</h3>
+                <ul class="subcategories">
+                    <li>Vieglie auto</li>
+                    <li>Smagais transports</li>
+                    <li>Motocikli un motorolleri</li>
+                    <li>Velosipēdi</li>
+                    <li>Laivas un ūdens transports</li>
+                    <li>Rezerves daļas un aksesuāri (visiem transportlīdzekļiem, izņemot vieglos auto)</li>
+                    <li>Cits transports</li>
+                </ul>
+            </div>
 
-      <div class="card">
-        <img src="/static/images/9.png" alt="Pakalpojumi" />
-        <h3>Pakalpojumi</h3>
-        <ul class="subcategories">
-          <li>Remonts un būvniecība</li>
-          <li>Transporta pakalpojumi</li>
-          <li>Skaistumkopšana</li>
-          <li>Privātskolotāji</li>
-          <li>IT un dizains</li>
-          <li>Citi pakalpojumi</li>
-        </ul>
-      </div>
+            <div class="card">
+                <img src="/static/images/9.png" alt="Pakalpojumi" />
+                <h3>Pakalpojumi</h3>
+                <ul class="subcategories">
+                    <li>Remonts un uzstādīšana</li>
+                    <li>Skaistumkopšana un veselība</li>
+                    <li>Mācības un kursi</li>
+                    <li>Noma</li>
+                    <li>Pasākumu organizēšana</li>
+                    <li>Tīrīšana un uzkopšana</li>
+                    <li>Cits pakalpojumiem</li>
+                </ul>
+            </div>
 
-</div>
+        </div>
+    </div>
 
-  <script>
-    // Gaidām, kamēr visa lapa ielādējas
-    document.addEventListener('DOMContentLoaded', () => {
-      const modal = document.getElementById('welcomeModal');
-      const closeButton = document.getElementById('closeModalButton');
+    <script>
+        // Gaidām, kamēr visa lapa ielādējas
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('welcomeModal');
+            const closeButton = document.getElementById('closeModalButton');
 
-      // Parādām logu, kad lapa ir gatava
-      setTimeout(() => {
-        modal.classList.add('active');
-      }, 500); // Maza aizture, lai animācija būtu plūdenāka
+            // Parādām logu, kad lapa ir gatava
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 500); // Maza aizture, lai animācija būtu plūdenāka
 
-      // Funkcija loga aizvēršanai
-      function closeModal() {
-        modal.classList.remove('active');
-      }
+            // Funkcija loga aizvēršanai
+            function closeModal() {
+                modal.classList.remove('active');
+            }
 
-      // Pievienojam notikumu pogai, lai aizvērtu logu
-      closeButton.addEventListener('click', closeModal);
-    });
-  </script>
+            // Pievienojam notikumu pogai, lai aizvērtu logu
+            closeButton.addEventListener('click', closeModal);
+        });
+    </script>
 
 </body>
 </html>
